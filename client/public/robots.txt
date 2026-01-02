@@ -1,0 +1,11 @@
+# robots.txt pour ROMUO VTC
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://romuo-vtc.ch/sitemap.xml
+
+# Interdire certains chemins (si nécessaire)
+# Disallow: /admin/
+# Disallow: /api/

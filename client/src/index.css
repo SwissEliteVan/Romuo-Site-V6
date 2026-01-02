@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Variables personnalisées - Swiss Modernism */
+:root {
+  --noir-profond: #0a0a0a;
+  --or-suisse: #d4af37;
+  --blanc-pur: #ffffff;
+  --gris-ardoise: #2d3748;
+}
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--noir-profond);
+  color: var(--blanc-pur);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typographie */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Focus visible pour accessibilité */
+*:focus-visible {
+  outline: 2px solid var(--or-suisse);
+  outline-offset: 2px;
+}
+
+/* Skip to content pour accessibilité */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--or-suisse);
+  color: var(--noir-profond);
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
