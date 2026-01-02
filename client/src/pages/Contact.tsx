@@ -6,6 +6,7 @@ import Card from '../components/ui/Card';
 import Container from '../components/ui/Container';
 import Section from '../components/ui/Section';
 import Input from '../components/ui/Input';
+import RouteCalculator from '../components/booking/RouteCalculator';
 import { breadcrumbSchema } from '../utils/jsonLd';
 
 export default function Contact() {
@@ -130,12 +131,27 @@ export default function Contact() {
         </Container>
       </Section>
 
+      {/* Calculateur de devis */}
+      <Section variant="light" spacing="lg">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-4">Estimez votre trajet</h2>
+              <p className="text-[#999999]">
+                Obtenez une estimation instantanée de distance, durée et tarif
+              </p>
+            </div>
+            <RouteCalculator />
+          </div>
+        </Container>
+      </Section>
+
       {/* Formulaire de contact */}
       <Section spacing="lg">
         <Container>
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Demander un devis</h2>
+              <h2 className="text-3xl font-bold mb-4">Demander un devis personnalisé</h2>
               <p className="text-[#999999]">
                 Remplissez le formulaire ci-dessous et nous vous recontacterons rapidement
               </p>

@@ -6,6 +6,7 @@
 dist/
 build/
 *.dist
+hostinger/
 
 # Environment variables
 .env
