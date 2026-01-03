@@ -2,6 +2,7 @@ import { Route, Router, Switch } from 'wouter';
 import { lazy, Suspense } from 'react';
 import Layout from './components/layout/Layout';
 import LoadingSpinner from './components/ui/LoadingSpinner';
+import CookieBanner from './components/layout/CookieBanner';
 
 // Lazy loading des pages pour optimiser les performances
 const Home = lazy(() => import('./pages/Home'));
@@ -30,6 +31,7 @@ function App() {
           </Switch>
         </Suspense>
       </Layout>
+      <CookieBanner />
     </Router>
   );
 }
