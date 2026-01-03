@@ -29,6 +29,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 - 6 animations CSS personnalisées (fadeIn, slideIn, pulse, shimmer)
 - Hook useInView avec Intersection Observer
 - Composant AnimatedSection réutilisable
+- Composant BackToTop avec smooth scroll
 - Delays en cascade pour animations
 - Effets hover avec ombre dorée
 - Transitions fluides (cubic-bezier)
@@ -61,6 +62,11 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 - _headers Netlify (security, cache control, CSP)
 - _redirects pour SPA routing et HTTPS
 - vercel.json pour configuration Vercel
+- vite.config.ts avec PWA et optimisations build
+- tsconfig.json strict avec path mapping
+- package.json avec scripts complets
+- .eslintrc.cjs et .prettierrc pour qualité code
+- .gitignore pour fichiers à exclure
 - README.md complet (179 lignes)
 - CHANGELOG.md pour suivi des versions
 
@@ -90,10 +96,14 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 #### Performance
 - Code splitting avec React.lazy()
+- Manual chunks pour vendors (react, wouter, helmet, icons)
+- Terser minification avec drop_console en production
 - Suspense avec LoadingSpinner
 - Cache immutable pour assets (1 an)
 - No-cache pour service worker et manifest
+- Cache TomTom API 24h avec Workbox
 - Images optimisées (placeholder WebP)
+- Target ES2015 pour compatibilité
 
 ### Documenté
 
@@ -106,7 +116,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ## Commits
 
-Total: 6 commits pushés sur `claude/vtc-app-mvp-4FF0V`
+Total: 8 commits pushés sur `claude/vtc-app-mvp-4FF0V`
 
 1. `fix: Optimisation responsive complète du site vitrine`
 2. `feat: Intégration TomTom API pour calcul d'itinéraire précis`
@@ -114,6 +124,8 @@ Total: 6 commits pushés sur `claude/vtc-app-mvp-4FF0V`
 4. `feat: PWA, bannière cookies et configuration complète`
 5. `docs: Ajout README complet avec documentation technique`
 6. `feat: Configuration déploiement et gestion d'erreurs`
+7. `docs: Ajout CHANGELOG complet v1.0.0`
+8. `feat: Configuration projet complète et bouton BackToTop`
 
 ## TODO
 
