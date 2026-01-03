@@ -1,0 +1,237 @@
+// ============================================================================
+// ROMUO VTC - PRISMA SCHEMA
+// ============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Pour SQLite MVP : provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// USERS & AUTH
+// ============================================================================
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         UserRole
+  firstName    String?  @map("first_name")
+  lastName     String?  @map("last_name")
+  phone        String?
+  locale       String   @default("fr")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  driverProfile DriverProfile?
+  ridesAsRider  Ride[]         @relation("RiderRides")
+  ridesAsDriver Ride[]         @relation("DriverRides")
+
+  @@map("users")
+}
+
+enum UserRole {
+  rider
+  driver
+  admin
+
+  @@map("user_role")
+}
+
+// ============================================================================
+// DRIVER PROFILES
+// ============================================================================
+
+model DriverProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  licenseNumber String? @map("license_number")
+  vehicleId     String? @unique @map("vehicle_id")
+  vehicle       Vehicle?
+
+  isOnline      Boolean @default(false) @map("is_online")
+  isApproved    Boolean @default(false) @map("is_approved")
+
+  lastLocationLat       Float?    @map("last_location_lat")
+  lastLocationLng       Float?    @map("last_location_lng")
+  lastLocationUpdatedAt DateTime? @map("last_location_updated_at")
+
+  rating     Float? @default(5.0)
+  totalTrips Int    @default(0) @map("total_trips")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([isOnline, isApproved])
+  @@index([lastLocationLat, lastLocationLng])
+  @@map("driver_profiles")
+}
+
+// ============================================================================
+// VEHICLES
+// ============================================================================
+
+model Vehicle {
+  id           String   @id @default(cuid())
+  driverId     String   @unique @map("driver_id")
+  driver       DriverProfile @relation(fields: [driverId], references: [id], onDelete: Cascade)
+
+  make         String
+  model        String
+  year         Int
+  color        String
+  licensePlate String   @map("license_plate")
+  capacity     Int      @default(4)
+  vehicleType  VehicleType @default(standard) @map("vehicle_type")
+
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("vehicles")
+}
+
+enum VehicleType {
+  standard
+  premium
+  van
+
+  @@map("vehicle_type")
+}
+
+// ============================================================================
+// RIDES
+// ============================================================================
+
+model Ride {
+  id       String     @id @default(cuid())
+  riderId  String     @map("rider_id")
+  rider    User       @relation("RiderRides", fields: [riderId], references: [id])
+  driverId String?    @map("driver_id")
+  driver   User?      @relation("DriverRides", fields: [driverId], references: [id])
+
+  status   RideStatus @default(requested)
+
+  // Pickup
+  pickupAddress String @map("pickup_address")
+  pickupLat     Float  @map("pickup_lat")
+  pickupLng     Float  @map("pickup_lng")
+
+  // Dropoff
+  dropoffAddress String @map("dropoff_address")
+  dropoffLat     Float  @map("dropoff_lat")
+  dropoffLng     Float  @map("dropoff_lng")
+
+  // Estimation
+  estimatedDistanceKm  Float @map("estimated_distance_km")
+  estimatedDurationMin Int   @map("estimated_duration_min")
+  estimatedPrice       Float @map("estimated_price")
+
+  // Final
+  finalPrice Float? @map("final_price")
+
+  // Timestamps
+  requestedAt DateTime  @default(now()) @map("requested_at")
+  acceptedAt  DateTime? @map("accepted_at")
+  startedAt   DateTime? @map("started_at")
+  completedAt DateTime? @map("completed_at")
+  canceledAt  DateTime? @map("canceled_at")
+
+  // Cancellation
+  cancellationReason String? @map("cancellation_reason")
+  canceledBy         String? @map("canceled_by")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  events   RideEvent[]
+  payment  Payment?
+
+  @@index([riderId, status])
+  @@index([driverId, status])
+  @@index([status, createdAt])
+  @@map("rides")
+}
+
+enum RideStatus {
+  requested
+  offered
+  accepted
+  en_route
+  arrived
+  in_trip
+  completed
+  canceled
+  no_driver_available
+
+  @@map("ride_status")
+}
+
+// ============================================================================
+// RIDE EVENTS (Audit Trail)
+// ============================================================================
+
+model RideEvent {
+  id        String   @id @default(cuid())
+  rideId    String   @map("ride_id")
+  ride      Ride     @relation(fields: [rideId], references: [id], onDelete: Cascade)
+
+  eventType RideEventType @map("event_type")
+  metadata  Json     @default("{}")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([rideId, createdAt])
+  @@map("ride_events")
+}
+
+enum RideEventType {
+  status_changed
+  driver_assigned
+  location_updated
+  offer_sent
+  offer_accepted
+  offer_rejected
+  offer_expired
+
+  @@map("ride_event_type")
+}
+
+// ============================================================================
+// PAYMENTS
+// ============================================================================
+
+model Payment {
+  id            String        @id @default(cuid())
+  rideId        String        @unique @map("ride_id")
+  ride          Ride          @relation(fields: [rideId], references: [id], onDelete: Cascade)
+
+  amount        Float
+  currency      String        @default("CHF")
+  status        PaymentStatus @default(pending)
+  paymentMethod String        @map("payment_method")
+  transactionId String?       @map("transaction_id")
+
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  @@index([status, createdAt])
+  @@map("payments")
+}
+
+enum PaymentStatus {
+  pending
+  completed
+  failed
+  refunded
+
+  @@map("payment_status")
+}
