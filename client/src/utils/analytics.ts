@@ -1,4 +1,4 @@
-// import ReactGA from 'react-ga4'; // À décommenter quand GA4 est configuré
+import ReactGA from 'react-ga4';
 
 /**
  * Utilitaires pour Google Analytics 4
@@ -26,11 +26,11 @@ function hasAnalyticsConsent(): boolean {
 export function trackReservationClick(location: string) {
   if (!hasAnalyticsConsent()) return;
 
-  // ReactGA.event({
-  //   category: 'conversion',
-  //   action: 'reservation_click',
-  //   label: location, // Ex: 'home_hero', 'services_page', etc.
-  // });
+  ReactGA.event({
+    category: 'conversion',
+    action: 'reservation_click',
+    label: location, // Ex: 'home_hero', 'services_page', etc.
+  });
 
   console.log('Event tracked: reservation_click', location);
 }
@@ -39,10 +39,10 @@ export function trackReservationClick(location: string) {
 export function trackBeginCheckout() {
   if (!hasAnalyticsConsent()) return;
 
-  // ReactGA.event({
-  //   category: 'conversion',
-  //   action: 'begin_checkout',
-  // });
+  ReactGA.event({
+    category: 'conversion',
+    action: 'begin_checkout',
+  });
 
   console.log('Event tracked: begin_checkout');
 }
@@ -51,11 +51,11 @@ export function trackBeginCheckout() {
 export function trackPurchase(value: number = 0) {
   if (!hasAnalyticsConsent()) return;
 
-  // ReactGA.event({
-  //   category: 'conversion',
-  //   action: 'purchase',
-  //   value: value, // Montant en CHF (optionnel)
-  // });
+  ReactGA.event({
+    category: 'conversion',
+    action: 'purchase',
+    value: value, // Montant en CHF (optionnel)
+  });
 
   console.log('Event tracked: purchase', value);
 }
@@ -64,11 +64,11 @@ export function trackPurchase(value: number = 0) {
 export function trackContactClick(method: 'phone' | 'email') {
   if (!hasAnalyticsConsent()) return;
 
-  // ReactGA.event({
-  //   category: 'engagement',
-  //   action: 'contact_click',
-  //   label: method,
-  // });
+  ReactGA.event({
+    category: 'engagement',
+    action: 'contact_click',
+    label: method,
+  });
 
   console.log('Event tracked: contact_click', method);
 }
@@ -77,10 +77,10 @@ export function trackContactClick(method: 'phone' | 'email') {
 export function trackMapView() {
   if (!hasAnalyticsConsent()) return;
 
-  // ReactGA.event({
-  //   category: 'engagement',
-  //   action: 'map_view',
-  // });
+  ReactGA.event({
+    category: 'engagement',
+    action: 'map_view',
+  });
 
   console.log('Event tracked: map_view');
 }
@@ -89,11 +89,11 @@ export function trackMapView() {
 export function trackRouteCalculated(distance: number) {
   if (!hasAnalyticsConsent()) return;
 
-  // ReactGA.event({
-  //   category: 'engagement',
-  //   action: 'route_calculated',
-  //   value: Math.round(distance), // Distance en km
-  // });
+  ReactGA.event({
+    category: 'engagement',
+    action: 'route_calculated',
+    value: Math.round(distance), // Distance en km
+  });
 
   console.log('Event tracked: route_calculated', distance);
 }
@@ -102,7 +102,7 @@ export function trackRouteCalculated(distance: number) {
 export function trackPageView(path: string) {
   if (!hasAnalyticsConsent()) return;
 
-  // ReactGA.send({ hitType: 'pageview', page: path });
+  ReactGA.send({ hitType: 'pageview', page: path });
 
   console.log('Event tracked: pageview', path);
 }

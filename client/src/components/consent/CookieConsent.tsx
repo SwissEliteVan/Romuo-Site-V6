@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { X, Cookie } from 'lucide-react';
 import Button from '../ui/Button';
 import { Link } from 'wouter';
-// import ReactGA from 'react-ga4'; // À décommenter quand GA4 est configuré
+import ReactGA from 'react-ga4';
 
 const CONSENT_KEY = 'romuo-cookie-consent';
 
@@ -25,14 +25,13 @@ export default function CookieConsent() {
   }, []);
 
   const initializeGA4 = () => {
-    // TODO: À activer quand vous avez une ID GA4 réelle
-    // const GA4_ID = import.meta.env.VITE_GA4_ID || 'G-XXXXXXXXXX';
-    // if (GA4_ID && GA4_ID !== 'G-XXXXXXXXXX') {
-    //   ReactGA.initialize(GA4_ID);
-    //   ReactGA.send('pageview');
-    // }
+    const GA4_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID || 'G-CZ1TY5HNKB';
+    if (GA4_ID && GA4_ID !== 'G-XXXXXXXXXX') {
+      ReactGA.initialize(GA4_ID);
+      ReactGA.send('pageview');
+    }
 
-    console.log('GA4 serait initialisé ici avec le consentement');
+    console.log('GA4 initialized with consent:', GA4_ID);
   };
 
   const handleAcceptAll = () => {
@@ -46,10 +45,10 @@ export default function CookieConsent() {
     initializeGA4();
 
     // Événement de conversion : consentement accepté
-    // ReactGA.event({
-    //   category: 'consent',
-    //   action: 'accept_all',
-    // });
+    ReactGA.event({
+      category: 'consent',
+      action: 'accept_all',
+    });
   };
 
   const handleRejectAll = () => {

@@ -95,6 +95,9 @@ export default function Contact() {
       <Section spacing="lg">
         <Container>
 
+          <div className="max-w-4xl mx-auto">
+            <BookingForm />
+
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mb-6 sm:mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Demander un devis personnalisé</h2>
