@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { ArrowRight, CheckCircle, MapPin, Clock, Shield, Star } from 'lucide-react';
+import { ArrowRight, CheckCircle, MapPin, Clock, Shield, Star, Users, Car, Quote } from 'lucide-react';
 import SEO from '../components/seo/SEO';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
@@ -50,6 +50,57 @@ const zones = [
   'Bâle',
   'Berne',
   'Neuchâtel',
+];
+
+const vehicles = [
+  {
+    name: 'Berline premium',
+    category: 'Confort',
+    capacity: '3 passagers',
+    luggage: '3 valises',
+    features: ['Climatisation', 'Wi-Fi', 'Chargeur USB', 'Eau offerte'],
+    description: 'Mercedes Classe E ou équivalent - Idéale pour vos trajets business et transferts aéroport.',
+  },
+  {
+    name: 'Van premium',
+    category: 'Groupe',
+    capacity: '7 passagers',
+    luggage: '7 valises',
+    features: ['Climatisation', 'Wi-Fi', 'Chargeur USB', 'Espace généreux'],
+    description: 'Mercedes Vito ou équivalent - Parfaite pour les groupes et familles avec bagages.',
+  },
+  {
+    name: 'Berline luxe',
+    category: 'Prestige',
+    capacity: '3 passagers',
+    luggage: '3 valises',
+    features: ['Tout cuir', 'Wi-Fi', 'Minibar', 'Sièges massants'],
+    description: 'Mercedes Classe S ou équivalent - L\'excellence pour vos déplacements premium.',
+  },
+];
+
+const testimonials = [
+  {
+    name: 'Marie Dubois',
+    location: 'Genève',
+    rating: 5,
+    text: 'Service impeccable ! Chauffeur ponctuel, très professionnel et discret. La voiture était d\'une propreté irréprochable. Je recommande vivement pour tous vos déplacements.',
+    date: 'Décembre 2025',
+  },
+  {
+    name: 'Pierre Martin',
+    location: 'Lausanne',
+    rating: 5,
+    text: 'J\'utilise ROMUO VTC régulièrement pour mes déplacements professionnels. Toujours à l\'heure, tarifs transparents et service premium. Un vrai gain de temps.',
+    date: 'Novembre 2025',
+  },
+  {
+    name: 'Sophie Laurent',
+    location: 'Montreux',
+    rating: 5,
+    text: 'Transfert aéroport parfait ! Le chauffeur a surveillé mon vol et m\'attendait avec une pancarte. Service 5 étoiles, je referai appel à eux sans hésiter.',
+    date: 'Octobre 2025',
+  },
 ];
 
 const faqs = [
@@ -196,6 +247,94 @@ export default function Home() {
                 </div>
               </Card>
             </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Notre flotte */}
+      <Section variant="light" spacing="lg">
+        <Container>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Notre flotte de véhicules</h2>
+            <p className="text-lg text-[#999999] max-w-2xl mx-auto">
+              Des véhicules premium récents, entretenus avec soin pour votre confort
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {vehicles.map((vehicle) => (
+              <Card key={vehicle.name} className="hover:border-[#d4af37] transition-all duration-300 group">
+                <div className="mb-4 aspect-video bg-gradient-to-br from-[#d4af37]/10 to-[#0a0a0a] border border-[#2d3748] flex items-center justify-center group-hover:from-[#d4af37]/20 transition-all">
+                  <Car className="h-20 w-20 text-[#d4af37] opacity-60" aria-hidden="true" />
+                </div>
+                <div className="inline-block px-3 py-1 bg-[#d4af37]/10 text-[#d4af37] text-xs font-bold mb-3 border border-[#d4af37]/30">
+                  {vehicle.category}
+                </div>
+                <h3 className="text-2xl font-bold mb-2 group-hover:text-[#d4af37] transition-colors">
+                  {vehicle.name}
+                </h3>
+                <p className="text-[#999999] text-sm mb-4 leading-relaxed">
+                  {vehicle.description}
+                </p>
+                <div className="flex gap-4 mb-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-[#d4af37]" aria-hidden="true" />
+                    <span className="text-[#cccccc]">{vehicle.capacity}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-[#d4af37]" aria-hidden="true" />
+                    <span className="text-[#cccccc]">{vehicle.luggage}</span>
+                  </div>
+                </div>
+                <div className="border-t border-[#2d3748] pt-4">
+                  <div className="flex flex-wrap gap-2">
+                    {vehicle.features.map((feature) => (
+                      <span
+                        key={feature}
+                        className="text-xs px-2 py-1 bg-[#1a1a1a] border border-[#2d3748] text-[#cccccc]"
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* Témoignages clients */}
+      <Section spacing="lg">
+        <Container>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ce que disent nos <span className="text-[#d4af37]">clients</span>
+            </h2>
+            <p className="text-lg text-[#999999] max-w-2xl mx-auto">
+              Votre satisfaction est notre priorité
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((testimonial) => (
+              <Card key={testimonial.name} variant="glass" className="hover:border-[#d4af37] transition-all">
+                <div className="mb-4">
+                  <Quote className="h-8 w-8 text-[#d4af37] opacity-50" aria-hidden="true" />
+                </div>
+                <div className="flex mb-3">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-[#d4af37] fill-[#d4af37]" aria-hidden="true" />
+                  ))}
+                </div>
+                <p className="text-[#cccccc] mb-4 leading-relaxed italic">
+                  "{testimonial.text}"
+                </p>
+                <div className="border-t border-[#2d3748] pt-4">
+                  <p className="font-bold text-[#ffffff]">{testimonial.name}</p>
+                  <p className="text-sm text-[#999999]">{testimonial.location}</p>
+                  <p className="text-xs text-[#666666] mt-1">{testimonial.date}</p>
+                </div>
+              </Card>
+            ))}
           </div>
         </Container>
       </Section>

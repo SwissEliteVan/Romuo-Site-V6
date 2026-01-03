@@ -291,9 +291,13 @@ MIT License - © 2026 ROMUO VTC
 - [x] Cookie consent + GA4
 - [x] Déploiement Hostinger
 
-### Phase 2 : Améliorations (À venir)
+### Phase 2 : Améliorations (EN COURS)
+- [x] Section flotte de véhicules avec détails (Berline premium, Van, Berline luxe)
+- [x] Section témoignages clients avec système de notation
+- [x] Formulaire de réservation détaillé avec validation
+- [x] Sélection de type de service (transfert, business, longue distance, disposition)
+- [x] Sélection de nombre de passagers et bagages
 - [ ] Intégration Google Maps API réelle
-- [ ] Système de réservation en ligne
 - [ ] Paiement en ligne (Stripe/Twint)
 - [ ] Back-office admin
 - [ ] Multi-langue (FR/EN/DE)
