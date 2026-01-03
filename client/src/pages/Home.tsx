@@ -1,82 +1,64 @@
+import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'wouter';
-import { ArrowRight, CheckCircle, MapPin, Clock, Shield, Star } from 'lucide-react';
 import SEO from '../components/seo/SEO';
-import Button from '../components/ui/Button';
-import Card from '../components/ui/Card';
-import Container from '../components/ui/Container';
+import Hero from '../components/home/Hero';
+import Stats from '../components/home/Stats';
+import Vehicles from '../components/home/Vehicles';
+import Testimonials from '../components/home/Testimonials';
 import Section from '../components/ui/Section';
-import {
-  organizationSchema,
-  localBusinessSchema,
-  webSiteSchema,
-  faqSchema,
-} from '../utils/jsonLd';
+import Container from '../components/ui/Container';
+import Card from '../components/ui/Card';
+import Button from '../components/ui/Button';
+import RouteCalculator from '../components/booking/RouteCalculator';
+import { organizationSchema, localBusinessSchema, webSiteSchema, faqSchema } from '../utils/jsonLd';
 
 const services = [
   {
-    icon: MapPin,
-    title: 'Transfert aéroport',
-    description: 'Genève, Zurich, Bâle - Service ponctuel et confortable pour tous vos vols.',
-    href: '/services#transfert',
+    title: 'Transfert Aéroport',
+    description: 'Service premium pour vos trajets vers Genève, Zurich, Bâle',
+    icon: '✈️',
+    features: ['Prise en charge à l\'aéroport', 'Suivi de vol en temps réel', 'Aide aux bagages'],
+    color: 'from-blue-500/20 to-transparent',
   },
   {
-    icon: Clock,
-    title: 'Déplacements business',
-    description: 'Meetings, événements professionnels - Discrétion et ponctualité garanties.',
-    href: '/services#business',
+    title: 'Déplacements Business',
+    description: 'Solutions professionnelles pour vos rendez-vous d\'affaires',
+    icon: '💼',
+    features: ['Ponctualité garantie', 'Discrétion absolue', 'WiFi & recharge'],
+    color: 'from-purple-500/20 to-transparent',
   },
   {
-    icon: Shield,
-    title: 'Trajets longue distance',
-    description: 'Voyages inter-villes en Suisse et à l\'international avec tout le confort.',
-    href: '/services#longue-distance',
+    title: 'Longue Distance',
+    description: 'Voyages confortables en Suisse et pays limitrophes',
+    icon: '🌍',
+    features: ['Véhicules grand confort', 'Pauses régulières', 'Flexibilité totale'],
+    color: 'from-green-500/20 to-transparent',
   },
   {
-    icon: Star,
-    title: 'Mise à disposition',
-    description: 'Chauffeur dédié pour vos événements, tournées ou journées complètes.',
-    href: '/services#disposition',
+    title: 'Mise à Disposition',
+    description: 'Chauffeur dédié pour vos événements spéciaux',
+    icon: '⭐',
+    features: ['Disponibilité totale', 'Service personnalisé', 'Tarif dégressif'],
+    color: 'from-gold-500/20 to-transparent',
   },
-];
-
-const zones = [
-  'Genève',
-  'Lausanne',
-  'Montreux',
-  'Vevey',
-  'Nyon',
-  'Morges',
-  'Zurich',
-  'Bâle',
-  'Berne',
-  'Neuchâtel',
 ];
 
 const faqs = [
   {
     question: 'Comment réserver un trajet avec ROMUO VTC ?',
-    answer:
-      'Vous pouvez réserver par téléphone au 076 084 20 89, par email à contact@romuo-vtc.ch, ou via notre formulaire de contact en ligne. Nous recommandons de réserver à l\'avance pour garantir la disponibilité.',
+    answer: 'Vous pouvez réserver par téléphone au 076 084 20 89, par email à contact@romuo-vtc.ch, ou via notre formulaire de contact en ligne. Installation recommandée de notre app PWA pour une expérience optimale.',
   },
   {
     question: 'Quels sont vos horaires de service ?',
-    answer:
-      'ROMUO VTC est disponible 24h/24 et 7j/7 sur réservation. Que ce soit pour un départ matinal ou une arrivée tardive, nous nous adaptons à vos besoins.',
+    answer: 'ROMUO VTC est disponible 24h/24 et 7j/7 sur réservation. Que ce soit pour un départ matinal ou une arrivée tardive, nous nous adaptons à vos besoins.',
   },
   {
     question: 'Quelles zones géographiques couvrez-vous ?',
-    answer:
-      'Nous opérons dans toute la Suisse romande (Genève, Lausanne, Montreux, etc.) et proposons également des trajets longue distance vers d\'autres régions suisses et pays limitrophes.',
+    answer: 'Nous opérons dans toute la Suisse romande (Genève, Lausanne, Montreux, etc.) et proposons également des trajets longue distance vers d\'autres régions suisses et pays limitrophes.',
   },
   {
     question: 'Comment sont calculés les tarifs ?',
-    answer:
-      'Nos tarifs sont calculés en fonction de la distance, de la durée du trajet et du type de service. Demandez un devis gratuit et instantané pour connaître le prix exact de votre course.',
-  },
-  {
-    question: 'Quels moyens de paiement acceptez-vous ?',
-    answer:
-      'Nous acceptons les paiements en espèces, par carte bancaire, virement bancaire et facture pour les entreprises. Le paiement peut être effectué à bord ou à l\'avance selon votre préférence.',
+    answer: 'Nos tarifs sont calculés en fonction de la distance, de la durée du trajet et du type de service. Utilisez notre calculateur en ligne pour un devis instantané et transparent.',
   },
 ];
 
@@ -86,182 +68,142 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="ROMUO VTC - Service de transport premium en Suisse | Chauffeur privé"
-        description="ROMUO VTC : votre chauffeur privé en Suisse. Transferts aéroport, déplacements business et trajets longue distance. Réservation 24/7 - Service premium et ponctuel."
-        keywords="VTC Suisse, chauffeur privé Genève, transport premium, transfert aéroport Genève, VTC Lausanne, taxi premium Suisse, chauffeur Montreux, VTC Vevey"
+        title="ROMUO VTC - Transport Premium Suisse | Chauffeur Privé 24/7"
+        description="Service de chauffeur privé haut de gamme en Suisse. Transferts aéroport, déplacements business et trajets longue distance. Flotte premium Mercedes & Tesla. Réservation 24/7."
+        keywords="VTC Suisse, chauffeur privé Genève, transport premium, transfert aéroport Genève, VTC Lausanne, Mercedes VTC, Tesla VTC, chauffeur Montreux, VTC Vevey"
         jsonLd={jsonLdData}
       />
 
-      {/* Hero Section */}
-      <Section spacing="lg" className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#d4af37]/10 to-transparent pointer-events-none" />
-        <Container>
-          <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Votre <span className="text-[#d4af37]">chauffeur privé</span>
-              <br className="hidden sm:block" />
-              <span className="sm:hidden"> </span>
-              en Suisse
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-[#cccccc] mb-8 max-w-2xl mx-auto leading-relaxed px-2">
-              Service VTC premium disponible 24/7. Confort, ponctualité et discrétion
-              pour tous vos déplacements professionnels et personnels.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center max-w-md sm:max-w-none mx-auto px-4">
-              <Link href="/contact" className="w-full sm:w-auto">
-                <Button size="lg" className="group w-full">
-                  Réserver maintenant
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                </Button>
-              </Link>
-              <a href="tel:+41760842089" className="w-full sm:w-auto">
-                <Button size="lg" variant="secondary" className="w-full">
-                  076 084 20 89
-                </Button>
-              </a>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      {/* Hero Premium */}
+      <Hero />
 
-      {/* Services Section */}
-      <Section variant="light" spacing="lg">
+      {/* Stats & Trust Badges */}
+      <Stats />
+
+      {/* Services Premium */}
+      <Section spacing="xl" className="relative bg-gradient-to-b from-black via-gray-900 to-black">
         <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Nos services</h2>
-            <p className="text-lg text-[#999999] max-w-2xl mx-auto">
-              Un service adapté à chaque besoin, avec la même exigence de qualité
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Nos <span className="text-gold-500">Services</span>
+            </h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              Des solutions de transport sur mesure pour tous vos besoins
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service) => {
-              const Icon = service.icon;
-              return (
-                <Link key={service.title} href={service.href}>
-                  <Card className="h-full hover:border-[#d4af37] transition-all duration-300 cursor-pointer group">
-                    <Icon className="h-10 w-10 text-[#d4af37] mb-4 group-hover:scale-110 transition-transform" aria-hidden="true" />
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-[#d4af37] transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-[#999999] text-sm leading-relaxed">
-                      {service.description}
-                    </p>
-                  </Card>
-                </Link>
-              );
-            })}
-          </div>
-        </Container>
-      </Section>
 
-      {/* Pourquoi nous choisir */}
-      <Section spacing="lg">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="px-4 sm:px-0">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
-                Pourquoi choisir <span className="text-[#d4af37]">ROMUO VTC</span> ?
-              </h2>
-              <div className="space-y-3 sm:space-y-4">
-                {[
-                  'Chauffeurs professionnels et expérimentés',
-                  'Véhicules premium récents et entretenus',
-                  'Ponctualité garantie',
-                  'Service disponible 24h/24, 7j/7',
-                  'Tarifs transparents et compétitifs',
-                  'Discrétion et confidentialité',
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-[#d4af37] flex-shrink-0 mt-0.5 sm:mt-1" aria-hidden="true" />
-                    <span className="text-[#cccccc] text-base sm:text-lg leading-relaxed">{item}</span>
-                  </div>
-                ))}
-              </div>
-              <Link href="/services" className="block mt-6 sm:mt-8">
-                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                  Découvrir nos services
-                </Button>
-              </Link>
-            </div>
-            <div className="relative px-4 sm:px-0">
-              <Card variant="glass" className="p-6 sm:p-8">
-                <div className="text-center space-y-4 sm:space-y-6">
-                  <div className="inline-flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 border-4 border-[#d4af37] rounded-full mx-auto">
-                    <Star className="h-8 w-8 sm:h-10 sm:w-10 text-[#d4af37] fill-[#d4af37]" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-bold">Excellence garantie</h3>
-                  <p className="text-[#cccccc] leading-relaxed text-sm sm:text-base">
-                    Notre engagement : vous offrir une expérience de transport premium
-                    à la hauteur de vos attentes, pour chaque trajet.
-                  </p>
-                </div>
-              </Card>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Zones desservies */}
-      <Section variant="light" spacing="md">
-        <Container>
-          <div className="text-center mb-6 sm:mb-8 px-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Zones desservies</h2>
-            <p className="text-base sm:text-lg text-[#999999]">
-              Toute la Suisse romande et au-delà
-            </p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 px-4">
-            {zones.map((zone) => (
-              <div
-                key={zone}
-                className="px-4 sm:px-6 py-2 sm:py-3 border-2 border-[#2d3748] hover:border-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-200 text-[#ffffff] font-medium text-sm sm:text-base"
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {services.map((service, index) => (
+              <Card
+                key={index}
+                variant="glass"
+                className={`group relative overflow-hidden bg-gradient-to-br ${service.color} hover:scale-105 transition-all duration-300 cursor-pointer`}
               >
-                {zone}
-              </div>
+                <div className="p-6">
+                  <div className="text-5xl mb-4">{service.icon}</div>
+                  <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
+                  <p className="text-sm text-gray-400 mb-4">{service.description}</p>
+
+                  <div className="space-y-2">
+                    {service.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-sm text-gray-300">
+                        <CheckCircle className="w-4 h-4 text-gold-500 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-gold-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              </Card>
             ))}
           </div>
+
+          <div className="text-center">
+            <Link href="/services">
+              <Button size="lg" className="group">
+                Découvrir tous nos services
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
         </Container>
       </Section>
 
-      {/* FAQ Section */}
-      <Section spacing="lg">
-        <Container size="md">
-          <div className="text-center mb-8 sm:mb-10 md:mb-12 px-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Questions fréquentes</h2>
-            <p className="text-base sm:text-lg text-[#999999]">
+      {/* Vehicles Showcase */}
+      <Vehicles />
+
+      {/* Quote Calculator */}
+      <Section spacing="xl" className="relative bg-black">
+        <div className="absolute inset-0 bg-gradient-to-br from-gold-500/5 via-transparent to-blue-500/5"></div>
+        <Container className="relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Calculez votre <span className="text-gold-500">Devis</span>
+            </h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              Obtenez un tarif transparent et instantané pour votre trajet
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <RouteCalculator />
+          </div>
+        </Container>
+      </Section>
+
+      {/* Testimonials */}
+      <Testimonials />
+
+      {/* FAQ */}
+      <Section spacing="xl" className="bg-gradient-to-b from-gray-900 to-black">
+        <Container>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Questions <span className="text-gold-500">fréquentes</span>
+            </h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               Tout ce que vous devez savoir sur nos services
             </p>
           </div>
-          <div className="space-y-3 sm:space-y-4 px-4">
+
+          <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
-              <Card key={index} className="hover:border-[#d4af37] transition-colors">
-                <h3 className="text-lg sm:text-xl font-bold mb-2 text-[#ffffff]">{faq.question}</h3>
-                <p className="text-sm sm:text-base text-[#cccccc] leading-relaxed">{faq.answer}</p>
+              <Card key={index} variant="glass" className="p-6 hover:border-gold-500/50 transition-colors">
+                <h3 className="text-lg font-bold text-white mb-3">{faq.question}</h3>
+                <p className="text-gray-400 leading-relaxed">{faq.answer}</p>
               </Card>
             ))}
           </div>
         </Container>
       </Section>
 
-      {/* CTA Final */}
-      <Section variant="dark" spacing="md" className="border-t border-[#2d3748]">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
-              Prêt à réserver votre prochain trajet ?
+      {/* Final CTA */}
+      <Section spacing="xl" className="relative bg-black overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gold-500/10 via-transparent to-blue-500/10"></div>
+        <Container className="relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Prêt à voyager avec <span className="text-gold-500">style</span> ?
             </h2>
-            <p className="text-base sm:text-lg text-[#cccccc] mb-6 sm:mb-8">
-              Contactez-nous dès maintenant pour un devis gratuit et personnalisé
+            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+              Réservez votre chauffeur privé dès maintenant et découvrez le transport premium à la suisse.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <Link href="/contact" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto">Demander un devis</Button>
-              </Link>
-              <Link href="/tarifs" className="w-full sm:w-auto">
-                <Button size="lg" variant="ghost" className="w-full sm:w-auto">
-                  Voir les tarifs
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/contact">
+                <Button size="lg" variant="primary" className="group">
+                  Réserver un trajet
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
+
+              <a href="tel:+41760842089">
+                <Button size="lg" variant="outline">
+                  Appeler : 076 084 20 89
+                </Button>
+              </a>
             </div>
           </div>
         </Container>
