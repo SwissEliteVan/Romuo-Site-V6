@@ -1,0 +1,43 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="64" fill="#0A0A0A"/>
+
+  <!-- Gold gradient -->
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C9A961;stop-opacity:1" />
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Stylized R letter -->
+  <g filter="url(#glow)">
+    <!-- R vertical bar -->
+    <rect x="140" y="140" width="60" height="232" rx="8" fill="url(#goldGradient)"/>
+
+    <!-- R top curve -->
+    <path d="M 200 140 L 340 140 C 360 140 380 160 380 180 L 380 220 C 380 240 360 260 340 260 L 200 260 Z"
+          fill="url(#goldGradient)"/>
+
+    <!-- R diagonal leg -->
+    <path d="M 240 260 L 360 372 L 320 372 L 200 260 Z"
+          fill="url(#goldGradient)"/>
+  </g>
+
+  <!-- Underline accent -->
+  <rect x="140" y="390" width="232" height="8" rx="4" fill="url(#goldGradient)" opacity="0.6"/>
+
+  <!-- Swiss precision dots -->
+  <circle cx="380" cy="390" r="12" fill="url(#goldGradient)"/>
+  <circle cx="410" cy="390" r="8" fill="url(#goldGradient)" opacity="0.7"/>
+  <circle cx="434" cy="390" r="6" fill="url(#goldGradient)" opacity="0.5"/>
+</svg>

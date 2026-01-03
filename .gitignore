@@ -110,3 +110,40 @@ temp/
 # Prisma
 prisma/migrations/*
 !prisma/migrations/.gitkeep
+
+# SSL Certificates (NEVER commit)
+nginx/ssl/*.pem
+nginx/ssl/*.key
+nginx/ssl/*.crt
+nginx/ssl/*.csr
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Secrets and credentials
+secrets/
+credentials/
+*.credentials
+*.secret
+
+# Docker volumes and logs
+logs/
+docker-compose.override.yml
+
+# Backup files
+*.backup
+*.bak
+*.old
+*.orig
+
+# Archive files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# Production config (use examples instead)
+.env.production
+config.production.json

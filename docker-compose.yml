@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # Frontend - Site vitrine ROMUO VTC
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    container_name: romuo-vtc-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      - VITE_TOMTOM_API_KEY=${VITE_TOMTOM_API_KEY}
+      - VITE_GA4_MEASUREMENT_ID=${VITE_GA4_MEASUREMENT_ID}
+    command: npm run dev
+    networks:
+      - romuo-network
+    restart: unless-stopped
+
+  # Nginx proxy (optionnel pour production locale)
+  nginx:
+    image: nginx:alpine
+    container_name: romuo-vtc-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./client/dist:/usr/share/nginx/html:ro
+    depends_on:
+      - frontend
+    networks:
+      - romuo-network
+    restart: unless-stopped
+    profiles:
+      - production
+
+networks:
+  romuo-network:
+    driver: bridge
+
+volumes:
+  node_modules:
