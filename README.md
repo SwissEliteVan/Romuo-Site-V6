@@ -1,10 +1,11 @@
 # 🚗 ROMUO VTC — Site Web Premium
 
-Application web moderne pour **ROMUO VTC**, service de transport premium en Suisse.
+Application web moderne et performante pour **ROMUO VTC**, service de chauffeur privé haut de gamme en Suisse.
 
-![Stack](https://img.shields.io/badge/Stack-React%20%2B%20TypeScript%20%2B%20Express-blue)
-![Deployment](https://img.shields.io/badge/Deployment-Hostinger%20Node.js-green)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+[![Node](https://img.shields.io/badge/node-18.x-brightgreen)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18.x-61dafb)](https://react.dev/)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](https://opensource.org/licenses/MIT)
 
 ---
 
@@ -25,68 +26,130 @@ Application web moderne pour **ROMUO VTC**, service de transport premium en Suis
 ### 🛠️ Stack technique
 
 **Frontend :**
-- React 19 + TypeScript
-- Vite (build)
-- Wouter (routing SPA)
-- Tailwind CSS v4
-- Radix UI (composants accessibles)
-- Framer Motion (animations)
+- **React 18** + **TypeScript 5** (strict mode)
+- **Vite** - Build tool ultra-rapide
+- **Wouter** - Routing SPA léger
+- **Tailwind CSS v4** - Styling Swiss Modernism
+- **Lucide React** - Icônes modernes
+- **React Helmet Async** - SEO meta tags
 
-**Backend :**
-- Express.js (serveur Node.js)
-- Headers de sécurité (CSP, X-Frame-Options, etc.)
-- Fallback SPA (toutes routes → index.html)
-- Health check endpoint
+**APIs & Services :**
+- **TomTom API** - Géocodage + calcul d'itinéraires
+- **Google Analytics 4** - Analytics (optionnel avec consent)
+- **PWA** - Service Worker avec Workbox
 
-**SEO & Analytics :**
-- react-helmet-async (méta dynamiques)
-- JSON-LD structured data
-- Google Analytics 4 (opt-in)
-- Sitemap XML + robots.txt
+**DevOps & Infrastructure :**
+- **Docker** - Containerisation multi-stage (Alpine + Nginx)
+- **Nginx** - Web server production avec SSL/TLS
+- **GitHub Actions** - CI/CD automatisé (lint, test, build, deploy)
+- **Netlify / Vercel** - Plateformes de déploiement
 
-**Déploiement :**
-- Hostinger Node.js Apps
-- Build automatisé
-- Script de packaging
+**Qualité & Tooling :**
+- **ESLint** + **Prettier** - Code quality
+- **TypeScript strict** - Type safety
+- **Lighthouse CI** - Performance monitoring
+- **Pre-commit hooks** - Validation automatique
+- **Makefile** - Commandes développeur simplifiées
 
 ---
 
-## 🚀 Installation locale
+## 🚀 Démarrage Rapide
 
 ### Prérequis
 
-- Node.js 18+ ou 20 LTS
-- npm (ou pnpm)
+- **Node.js** 18.x ou supérieur
+- **npm** 9.x ou supérieur
+- **Git** (recommandé)
+- **Docker** (optionnel)
 
-### Installation
+### Option 1 : Setup Automatique (Recommandé)
 
 ```bash
 # Cloner le repo
 git clone https://github.com/SwissEliteVan/Romuo-Site-V6.git
 cd Romuo-Site-V6
 
-# Installer les dépendances
-npm install --legacy-peer-deps
+# Lancer le setup interactif
+./setup.sh
 
-# Lancer en développement
+# Ou avec Make
+make init
+```
+
+Le script vous guidera à travers :
+- Configuration des variables d'environnement
+- Installation des dépendances
+- Configuration des clés API
+- Génération de certificats SSL (optionnel)
+
+### Option 2 : Setup Manuel
+
+```bash
+# Installer les dépendances
+cd client
+npm install
+
+# Configurer l'environnement
+cp .env.example .env
+# Éditer .env avec votre clé API TomTom
+
+# Lancer le serveur de développement
 npm run dev
 ```
 
-Le site sera accessible sur `http://localhost:3000`
+Le site sera accessible sur `http://localhost:5173`
 
-### Build production
+### Option 3 : Docker
 
 ```bash
-# Build complet (client + serveur)
-npm run build
+# Development
+make docker-dev
+# ou
+docker compose up
 
-# Tester en production locale
-npm start
+# Production
+make docker-prod
+# ou
+docker compose -f docker-compose.prod.yml up
+```
+
+## 🛠️ Commandes Disponibles
+
+Le projet utilise **Makefile** pour simplifier les commandes courantes :
+
+```bash
+make help              # Affiche toutes les commandes disponibles
+make init              # Setup complet du projet (setup.sh + install)
+make dev               # Lance le serveur de développement
+make build             # Build pour production
+make preview           # Prévisualise le build production
+make validate          # Vérifie code (type-check, lint, format)
+make lint              # Lance ESLint
+make lint-fix          # Corrige les erreurs ESLint
+make format            # Formate le code avec Prettier
+make audit             # Audit de sécurité npm
+
+# Docker
+make docker-dev        # Lance l'environnement Docker dev
+make docker-dev-bg     # Lance Docker dev en arrière-plan
+make docker-prod       # Lance l'environnement Docker production
+make docker-stop       # Arrête tous les containers Docker
+make docker-logs       # Affiche les logs Docker
+
+# SSL & Deployment
+make ssl-dev           # Génère certificats SSL auto-signés
+make generate-icons    # Génère les icônes PWA
+make deploy-netlify    # Déploie sur Netlify
+make deploy-vercel     # Déploie sur Vercel
+
+# Maintenance
+make clean             # Nettoie build artifacts
+make clean-install     # Nettoie et réinstalle dépendances
 ```
 
 ---
 
-## 📦 Déploiement sur Hostinger
+## 📦 Déploiement
 
 ### Guide complet
 
@@ -115,20 +178,26 @@ npm run prepare:hostinger
 
 ## 🌍 Variables d'environnement
 
-Créez un fichier `.env` à la racine (optionnel) :
+Créez un fichier `.env` dans le dossier `client/` :
 
 ```bash
-# Google Maps (pour calcul devis précis)
-VITE_MAPS_KEY=VOTRE_CLE_API
+# REQUIRED: TomTom API Key
+VITE_TOMTOM_API_KEY=your_api_key_here
 
-# Google Analytics 4 (pour tracking)
-VITE_GA4_ID=G-XXXXXXXXXX
-
-# Environnement
-NODE_ENV=production
+# OPTIONAL: Google Analytics 4 Measurement ID
+# VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
-> **Note :** Sans ces clés, l'app fonctionne avec des fonctionnalités limitées (calcul basique, pas de tracking).
+### Obtenir une clé API TomTom
+
+1. Créer un compte sur [TomTom Developer Portal](https://developer.tomtom.com/)
+2. Créer une nouvelle application
+3. Activer les APIs nécessaires :
+   - **Search API** (géocodage)
+   - **Routing API** (calcul d'itinéraires)
+4. Copier la clé API dans `client/.env`
+
+> **Note :** Sans clé TomTom, le calculateur utilisera une estimation basique (mode démo).
 
 ---
 
@@ -136,36 +205,67 @@ NODE_ENV=production
 
 ```
 Romuo-Site-V6/
-├── client/                  # Application React
-│   ├── public/              # Fichiers statiques (robots.txt, sitemap.xml, etc.)
+├── client/                       # Application React frontend
+│   ├── public/                   # Fichiers statiques
+│   │   ├── icons/                # Icônes PWA (8 tailles)
+│   │   ├── manifest.json         # PWA manifest
+│   │   ├── sitemap.xml           # SEO sitemap
+│   │   ├── robots.txt            # Directives robots
+│   │   ├── offline.html          # Page PWA offline
+│   │   ├── logo.svg              # Logo SVG
+│   │   ├── _headers              # Netlify security headers
+│   │   └── _redirects            # Netlify redirects
 │   ├── src/
-│   │   ├── components/      # Composants réutilisables
-│   │   │   ├── booking/     # Calcul devis + carte
-│   │   │   ├── consent/     # Cookie consent
-│   │   │   ├── layout/      # Header, Footer, Layout
-│   │   │   ├── seo/         # SEO components
-│   │   │   └── ui/          # UI primitives (Button, Card, etc.)
-│   │   ├── pages/           # Pages de l'app
-│   │   ├── utils/           # Utilitaires (analytics, jsonLd)
-│   │   ├── App.tsx          # Root component
-│   │   ├── main.tsx         # Entry point
-│   │   └── index.css        # Styles globaux
-│   └── index.html           # HTML template
-├── server/                  # Serveur Express
-│   └── index.ts             # Serveur Node.js
-├── scripts/                 # Scripts utilitaires
-│   └── prepare-hostinger.mjs  # Packaging Hostinger
-├── dist/                    # Build output
-│   ├── public/              # Site buildé
-│   └── server/              # Serveur compilé
-├── hostinger/               # Package prêt pour upload
-│   └── public_html/
-├── package.json
-├── vite.config.ts
-├── tsconfig.json
-├── .env.example
-├── DEPLOY_HOSTINGER.md      # Guide déploiement
-└── README.md                # Ce fichier
+│   │   ├── components/           # Composants réutilisables
+│   │   │   ├── booking/          # RouteCalculator (TomTom API)
+│   │   │   ├── layout/           # Header, Footer, CookieBanner
+│   │   │   └── ui/               # Button, Card, AnimatedSection, etc.
+│   │   ├── pages/                # Pages (Home, Services, Contact, etc.)
+│   │   ├── hooks/                # Custom hooks (useInView)
+│   │   ├── utils/                # Analytics, helpers
+│   │   ├── App.tsx               # Root component
+│   │   ├── main.tsx              # Entry point avec ErrorBoundary
+│   │   └── index.css             # Styles + animations
+│   ├── scripts/                  # Scripts d'automatisation
+│   │   ├── deploy.sh             # Script de déploiement
+│   │   ├── pre-commit.sh         # Validation pre-commit
+│   │   └── generate-icons.sh     # Génération icônes PWA
+│   ├── Dockerfile                # Production multi-stage
+│   ├── Dockerfile.dev            # Development
+│   ├── .dockerignore             # Exclusions Docker
+│   ├── .env.example              # Template env dev
+│   ├── .env.production.example   # Template env production
+│   ├── .nvmrc                    # Version Node.js (18)
+│   ├── .prettierrc               # Config Prettier
+│   ├── .eslintrc.cjs             # Config ESLint
+│   ├── lighthouserc.json         # Config Lighthouse CI
+│   ├── vite.config.ts            # Config Vite + PWA
+│   ├── tsconfig.json             # TypeScript strict
+│   ├── package.json              # Dependencies + scripts
+│   ├── README.md                 # Doc frontend
+│   ├── DEPLOYMENT.md             # Guide déploiement complet
+│   ├── CHANGELOG.md              # Historique versions
+│   └── GENERATE_ICONS.md         # Guide génération icônes
+├── nginx/                        # Configuration Nginx production
+│   ├── nginx.conf                # Config complète (SSL, cache, CSP)
+│   └── ssl/                      # Certificats SSL
+│       └── README.md             # Guide SSL
+├── .github/
+│   └── workflows/                # GitHub Actions CI/CD
+│       ├── ci.yml                # Tests, lint, build, audit
+│       ├── lighthouse.yml        # Performance audits
+│       └── deploy.yml            # Déploiement automatisé
+├── docker-compose.yml            # Environnement dev Docker
+├── docker-compose.prod.yml       # Environnement prod Docker
+├── Makefile                      # Commandes simplifiées (30+)
+├── setup.sh                      # Setup interactif
+├── .dockerignore                 # Exclusions Docker racine
+├── .editorconfig                 # Config éditeurs
+├── .gitignore                    # Git exclusions
+├── .nvmrc                        # Version Node.js
+├── CONTRIBUTING.md               # Guide contribution
+├── SECURITY.md                   # Politique de sécurité
+└── README.md                     # Ce fichier
 ```
 
 ---
@@ -279,30 +379,51 @@ npm run build
 
 MIT License - © 2026 ROMUO VTC
 
+## 📚 Documentation
+
+Documentation complète disponible :
+
+- **[Client README](client/README.md)** - Documentation frontend détaillée (179 lignes)
+- **[Deployment Guide](client/DEPLOYMENT.md)** - Guide de déploiement 4 plateformes (292 lignes)
+- **[Contributing Guide](CONTRIBUTING.md)** - Guide de contribution complet (326 lignes)
+- **[Security Policy](SECURITY.md)** - Politique de sécurité et rapports de vulnérabilités
+- **[Changelog](client/CHANGELOG.md)** - Historique des versions et TODO
+- **[Icon Generation](client/GENERATE_ICONS.md)** - Guide génération icônes PWA
+
 ---
 
 ## 🛣️ Roadmap
 
-### Phase 1 : Lancement (✅ COMPLÉTÉ)
-- [x] Site vitrine complet
-- [x] Calculateur devis basique
-- [x] Formulaire contact
-- [x] SEO optimisé
-- [x] Cookie consent + GA4
-- [x] Déploiement Hostinger
+### Phase 1 : MVP ✅ COMPLÉTÉ
+- [x] Site vitrine complet avec Swiss Modernism design
+- [x] Calculateur de devis avec **TomTom API** (géocodage + routing)
+- [x] Formulaire de contact multi-sections
+- [x] SEO optimisé (sitemap, robots.txt, meta tags)
+- [x] PWA avec service worker et offline mode
+- [x] Cookie consent RGPD/LPD conforme
+- [x] Google Analytics 4 (opt-in)
+- [x] Docker multi-stage production
+- [x] GitHub Actions CI/CD
+- [x] Documentation complète
+- [x] Scripts d'automatisation
 
-### Phase 2 : Améliorations (À venir)
-- [ ] Intégration Google Maps API réelle
+### Phase 2 : Améliorations (Prochaines étapes)
+- [ ] Générer les 8 icônes PWA (72px à 512px)
+- [ ] Compléter les mentions légales (IDE, adresse)
+- [ ] Ajouter tarifs indicatifs détaillés
+- [ ] Créer og-image.jpg pour social sharing
 - [ ] Système de réservation en ligne
-- [ ] Paiement en ligne (Stripe/Twint)
-- [ ] Back-office admin
+- [ ] Intégration calendrier de disponibilité
 - [ ] Multi-langue (FR/EN/DE)
 
 ### Phase 3 : Évolution (Futur)
+- [ ] Backend API avec base de données
+- [ ] Paiement en ligne (Stripe/Twint)
+- [ ] Back-office administrateur
 - [ ] Application mobile (React Native)
-- [ ] Tracking GPS en temps réel
-- [ ] Intégration calendrier
-- [ ] Programme de fidélité
+- [ ] Tracking GPS temps réel des véhicules
+- [ ] Programme de fidélité client
+- [ ] Notifications SMS/Email automatiques
 
 ---
 
