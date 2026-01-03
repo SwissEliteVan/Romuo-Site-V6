@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import Layout from './components/layout/Layout';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import CookieBanner from './components/layout/CookieBanner';
+import BackToTop from './components/ui/BackToTop';
 
 // Lazy loading des pages pour optimiser les performances
 const Home = lazy(() => import('./pages/Home'));
@@ -32,6 +33,7 @@ function App() {
         </Suspense>
       </Layout>
       <CookieBanner />
+      <BackToTop />
     </Router>
   );
 }
