@@ -3,7 +3,7 @@ import { clsx } from 'clsx';
 
 interface SectionProps extends HTMLAttributes<HTMLElement> {
   variant?: 'default' | 'dark' | 'light';
-  spacing?: 'sm' | 'md' | 'lg';
+  spacing?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export default function Section({
@@ -23,6 +23,7 @@ export default function Section({
         spacing === 'sm' && 'py-12',
         spacing === 'md' && 'py-16 md:py-20',
         spacing === 'lg' && 'py-20 md:py-28',
+        spacing === 'xl' && 'py-24 md:py-32',
         className
       )}
       {...props}

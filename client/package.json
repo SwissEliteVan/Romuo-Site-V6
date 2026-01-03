@@ -21,15 +21,19 @@
     "clean:install": "npm run clean && npm install",
     "test": "echo 'No tests configured yet'",
     "validate": "npm run type-check && npm run lint && npm run format:check",
+    "generate:icons": "node scripts/generate-pwa-icons.cjs",
+    "generate:screenshots": "node scripts/generate-screenshots.cjs",
+    "generate:pwa": "npm run generate:icons && npm run generate:screenshots",
     "deploy:netlify": "npm run build && netlify deploy --prod --dir=dist",
     "deploy:vercel": "npm run build && vercel --prod"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.303.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.4",
-    "wouter": "^3.0.0",
-    "lucide-react": "^0.303.0"
+    "wouter": "^3.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.48",
@@ -41,6 +45,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "prettier": "^3.2.4",
+    "sharp": "^0.34.5",
     "typescript": "^5.3.3",
     "vite": "^5.0.11",
     "vite-plugin-pwa": "^0.17.4"

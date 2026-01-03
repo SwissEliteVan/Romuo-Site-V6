@@ -7,17 +7,19 @@ export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Vérifier si l'utilisateur a déjà donné son consentement
+    // Vï¿½rifier si l'utilisateur a dï¿½jï¿½ donnï¿½ son consentement
     const cookieConsent = localStorage.getItem('romuo-cookie-consent');
 
     if (!cookieConsent) {
-      // Afficher la bannière après 1 seconde
+      // Afficher la banniï¿½re aprï¿½s 1 seconde
       const timer = setTimeout(() => {
         setIsVisible(true);
       }, 1000);
 
       return () => clearTimeout(timer);
     }
+
+    return undefined;
   }, []);
 
   const handleAccept = () => {
@@ -25,7 +27,7 @@ export default function CookieBanner() {
     localStorage.setItem('romuo-cookie-consent-date', new Date().toISOString());
     setIsVisible(false);
 
-    // Initialiser Google Analytics 4 si configuré
+    // Initialiser Google Analytics 4 si configurï¿½
     if (import.meta.env.VITE_GA4_MEASUREMENT_ID) {
       // @ts-ignore
       if (window.gtag) {
@@ -42,7 +44,7 @@ export default function CookieBanner() {
     localStorage.setItem('romuo-cookie-consent-date', new Date().toISOString());
     setIsVisible(false);
 
-    // Désactiver Google Analytics 4 si configuré
+    // Dï¿½sactiver Google Analytics 4 si configurï¿½
     if (import.meta.env.VITE_GA4_MEASUREMENT_ID) {
       // @ts-ignore
       if (window.gtag) {
@@ -66,7 +68,7 @@ export default function CookieBanner() {
       <div className="max-w-6xl mx-auto">
         <div className="bg-[#1a1a1a] border-2 border-[#d4af37] rounded-sm shadow-2xl p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-            {/* Icône et texte */}
+            {/* Icï¿½ne et texte */}
             <div className="flex gap-3 sm:gap-4 flex-1">
               <Cookie
                 className="h-6 w-6 sm:h-8 sm:w-8 text-[#d4af37] flex-shrink-0 mt-1"
@@ -83,8 +85,8 @@ export default function CookieBanner() {
                   id="cookie-banner-description"
                   className="text-xs sm:text-sm text-[#cccccc] leading-relaxed"
                 >
-                  Nous utilisons des cookies pour améliorer votre expérience de navigation et analyser
-                  le trafic du site. En cliquant sur "Accepter", vous consentez à l'utilisation de cookies
+                  Nous utilisons des cookies pour amï¿½liorer votre expï¿½rience de navigation et analyser
+                  le trafic du site. En cliquant sur "Accepter", vous consentez ï¿½ l'utilisation de cookies
                   analytiques (Google Analytics 4).{' '}
                   <Link href="/cookies" className="text-[#d4af37] hover:underline">
                     En savoir plus
@@ -117,7 +119,7 @@ export default function CookieBanner() {
             <button
               onClick={handleDecline}
               className="absolute top-2 right-2 sm:hidden text-[#999999] hover:text-[#ffffff] transition-colors"
-              aria-label="Fermer la bannière"
+              aria-label="Fermer la banniï¿½re"
             >
               <X className="h-5 w-5" />
             </button>

@@ -81,10 +81,12 @@ export default function Vehicles() {
 
           {/* Mobile Carousel */}
           <div className="md:hidden">
-            <VehicleCard
-              vehicle={vehicles[activeIndex]}
-              isActive={true}
-            />
+            {vehicles[activeIndex] && (
+              <VehicleCard
+                vehicle={vehicles[activeIndex]}
+                isActive={true}
+              />
+            )}
 
             {/* Dots */}
             <div className="flex justify-center mt-6 gap-2">

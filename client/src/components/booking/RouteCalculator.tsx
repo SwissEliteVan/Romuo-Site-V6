@@ -147,15 +147,20 @@ export default function RouteCalculator() {
         const dep = cities[depCity];
         const arr = cities[arrCity];
 
-        const R = 6371; // Rayon de la Terre en km
-        const dLat = (arr.lat - dep.lat) * Math.PI / 180;
-        const dLon = (arr.lng - dep.lng) * Math.PI / 180;
-        const a =
-          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.cos(dep.lat * Math.PI / 180) * Math.cos(arr.lat * Math.PI / 180) *
-          Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        distance = R * c;
+        if (dep && arr) {
+          const R = 6371; // Rayon de la Terre en km
+          const dLat = (arr.lat - dep.lat) * Math.PI / 180;
+          const dLon = (arr.lng - dep.lng) * Math.PI / 180;
+          const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(dep.lat * Math.PI / 180) * Math.cos(arr.lat * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+          distance = R * c;
+        } else {
+          // Estimation très basique si coordonnées non trouvées
+          distance = 30 + Math.random() * 50;
+        }
       } else {
         // Estimation très basique si villes non reconnues
         distance = 30 + Math.random() * 50;

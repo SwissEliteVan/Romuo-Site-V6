@@ -1,4 +1,4 @@
-import { ArrowRight, Play, Phone, Calendar } from 'lucide-react';
+import { ArrowRight, Phone, Calendar } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function Hero() {

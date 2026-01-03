@@ -42,6 +42,8 @@ export default function InstallBanner() {
 
       return () => window.removeEventListener('beforeinstallprompt', handler);
     }
+
+    return undefined;
   }, []);
 
   const handleInstall = async () => {

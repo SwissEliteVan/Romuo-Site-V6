@@ -93,10 +93,12 @@ export default function Testimonials() {
 
           {/* Mobile: Carousel */}
           <div className="md:hidden">
-            <TestimonialCard
-              testimonial={testimonials[activeIndex]}
-              isActive={true}
-            />
+            {testimonials[activeIndex] && (
+              <TestimonialCard
+                testimonial={testimonials[activeIndex]}
+                isActive={true}
+              />
+            )}
 
             {/* Dots */}
             <div className="flex justify-center mt-8 gap-2">
