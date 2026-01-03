@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr-CH">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#d4af37">
+    <title>Hors ligne - ROMUO VTC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        .icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: #0a0a0a;
+            stroke-width: 2;
+            fill: none;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        
+        .highlight {
+            color: #d4af37;
+        }
+        
+        p {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        
+        button {
+            background: #d4af37;
+            color: #0a0a0a;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        button:hover {
+            background: #c49d2f;
+            transform: translateY(-2px);
+        }
+        
+        .secondary {
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+        }
+        
+        .secondary:hover {
+            background: #d4af37;
+            color: #0a0a0a;
+        }
+        
+        .contact {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #2d3748;
+        }
+        
+        .contact a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .contact a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (min-width: 640px) {
+            .buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M8.56 2.75c.09-.21.11-.43.03-.64-.02-.05-.05-.1-.08-.15a1.5 1.5 0 00-1.42-.8H3.5A1.5 1.5 0 002 2.66v5.38c0 .82.67 1.5 1.5 1.5h.5c.13 0 .26-.02.38-.05.5-.14.95-.47 1.23-.93l.48-.84c.2-.36.55-.6.96-.66l3.89-.5c.35-.04.65-.27.76-.6.11-.32.03-.67-.2-.92l-1.37-1.5a1 1 0 01-.06-1.23l.87-1.21zM8.56 2.75c.09-.21.11-.43.03-.64-.02-.05-.05-.1-.08-.15a1.5 1.5 0 00-1.42-.8H3.5A1.5 1.5 0 002 2.66v5.38c0 .82.67 1.5 1.5 1.5h.5c.13 0 .26-.02.38-.05.5-.14.95-.47 1.23-.93l.48-.84c.2-.36.55-.6.96-.66l3.89-.5c.35-.04.65-.27.76-.6.11-.32.03-.67-.2-.92l-1.37-1.5a1 1 0 01-.06-1.23l.87-1.21zM1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+            </svg>
+        </div>
+        
+        <h1>Vous êtes <span class="highlight">hors ligne</span></h1>
+        
+        <p>
+            Il semble que vous n'ayez pas de connexion internet actuellement.
+            Certaines fonctionnalités du site ROMUO VTC nécessitent une connexion pour fonctionner.
+        </p>
+        
+        <div class="buttons">
+            <button onclick="window.location.reload()">
+                Réessayer
+            </button>
+            <button class="secondary" onclick="window.history.back()">
+                Retour
+            </button>
+        </div>
+        
+        <div class="contact">
+            <p style="margin-bottom: 10px;">
+                Besoin d'aide ? Contactez-nous :
+            </p>
+            <p>
+                <a href="tel:+41760842089">076 084 20 89</a>
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Vérifier la connexion toutes les 5 secondes
+        setInterval(() => {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }, 5000);
+        
+        // Écouter les changements de statut en ligne
+        window.addEventListener('online', () => {
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>
