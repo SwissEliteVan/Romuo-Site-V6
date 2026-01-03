@@ -96,25 +96,26 @@ export default function Home() {
       <Section spacing="lg" className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#d4af37]/10 to-transparent pointer-events-none" />
         <Container>
-          <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Votre <span className="text-[#d4af37]">chauffeur privé</span>
-              <br />
+              <br className="hidden sm:block" />
+              <span className="sm:hidden"> </span>
               en Suisse
             </h1>
-            <p className="text-lg md:text-xl text-[#cccccc] mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-[#cccccc] mb-8 max-w-2xl mx-auto leading-relaxed px-2">
               Service VTC premium disponible 24/7. Confort, ponctualité et discrétion
               pour tous vos déplacements professionnels et personnels.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button size="lg" className="group">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center max-w-md sm:max-w-none mx-auto px-4">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button size="lg" className="group w-full">
                   Réserver maintenant
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                 </Button>
               </Link>
-              <a href="tel:+41760842089">
-                <Button size="lg" variant="secondary">
+              <a href="tel:+41760842089" className="w-full sm:w-auto">
+                <Button size="lg" variant="secondary" className="w-full">
                   076 084 20 89
                 </Button>
               </a>
@@ -156,12 +157,12 @@ export default function Home() {
       {/* Pourquoi nous choisir */}
       <Section spacing="lg">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="px-4 sm:px-0">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
                 Pourquoi choisir <span className="text-[#d4af37]">ROMUO VTC</span> ?
               </h2>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {[
                   'Chauffeurs professionnels et expérimentés',
                   'Véhicules premium récents et entretenus',
@@ -171,25 +172,25 @@ export default function Home() {
                   'Discrétion et confidentialité',
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-[#d4af37] flex-shrink-0 mt-0.5" aria-hidden="true" />
-                    <span className="text-[#cccccc] text-lg">{item}</span>
+                    <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-[#d4af37] flex-shrink-0 mt-0.5 sm:mt-1" aria-hidden="true" />
+                    <span className="text-[#cccccc] text-base sm:text-lg leading-relaxed">{item}</span>
                   </div>
                 ))}
               </div>
-              <Link href="/services">
-                <Button size="lg" variant="secondary" className="mt-8">
+              <Link href="/services" className="block mt-6 sm:mt-8">
+                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
                   Découvrir nos services
                 </Button>
               </Link>
             </div>
-            <div className="relative">
-              <Card variant="glass" className="p-8">
-                <div className="text-center space-y-6">
-                  <div className="inline-flex items-center justify-center h-20 w-20 border-4 border-[#d4af37] rounded-full mx-auto">
-                    <Star className="h-10 w-10 text-[#d4af37] fill-[#d4af37]" aria-hidden="true" />
+            <div className="relative px-4 sm:px-0">
+              <Card variant="glass" className="p-6 sm:p-8">
+                <div className="text-center space-y-4 sm:space-y-6">
+                  <div className="inline-flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 border-4 border-[#d4af37] rounded-full mx-auto">
+                    <Star className="h-8 w-8 sm:h-10 sm:w-10 text-[#d4af37] fill-[#d4af37]" aria-hidden="true" />
                   </div>
-                  <h3 className="text-2xl font-bold">Excellence garantie</h3>
-                  <p className="text-[#cccccc] leading-relaxed">
+                  <h3 className="text-xl sm:text-2xl font-bold">Excellence garantie</h3>
+                  <p className="text-[#cccccc] leading-relaxed text-sm sm:text-base">
                     Notre engagement : vous offrir une expérience de transport premium
                     à la hauteur de vos attentes, pour chaque trajet.
                   </p>
@@ -203,17 +204,17 @@ export default function Home() {
       {/* Zones desservies */}
       <Section variant="light" spacing="md">
         <Container>
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Zones desservies</h2>
-            <p className="text-lg text-[#999999]">
+          <div className="text-center mb-6 sm:mb-8 px-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Zones desservies</h2>
+            <p className="text-base sm:text-lg text-[#999999]">
               Toute la Suisse romande et au-delà
             </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 px-4">
             {zones.map((zone) => (
               <div
                 key={zone}
-                className="px-6 py-3 border-2 border-[#2d3748] hover:border-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-200 text-[#ffffff] font-medium"
+                className="px-4 sm:px-6 py-2 sm:py-3 border-2 border-[#2d3748] hover:border-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-200 text-[#ffffff] font-medium text-sm sm:text-base"
               >
                 {zone}
               </div>
@@ -225,17 +226,17 @@ export default function Home() {
       {/* FAQ Section */}
       <Section spacing="lg">
         <Container size="md">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Questions fréquentes</h2>
-            <p className="text-lg text-[#999999]">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12 px-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Questions fréquentes</h2>
+            <p className="text-base sm:text-lg text-[#999999]">
               Tout ce que vous devez savoir sur nos services
             </p>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4 px-4">
             {faqs.map((faq, index) => (
               <Card key={index} className="hover:border-[#d4af37] transition-colors">
-                <h3 className="text-xl font-bold mb-2 text-[#ffffff]">{faq.question}</h3>
-                <p className="text-[#cccccc] leading-relaxed">{faq.answer}</p>
+                <h3 className="text-lg sm:text-xl font-bold mb-2 text-[#ffffff]">{faq.question}</h3>
+                <p className="text-sm sm:text-base text-[#cccccc] leading-relaxed">{faq.answer}</p>
               </Card>
             ))}
           </div>
@@ -245,19 +246,19 @@ export default function Home() {
       {/* CTA Final */}
       <Section variant="dark" spacing="md" className="border-t border-[#2d3748]">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="text-center max-w-3xl mx-auto px-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
               Prêt à réserver votre prochain trajet ?
             </h2>
-            <p className="text-lg text-[#cccccc] mb-8">
+            <p className="text-base sm:text-lg text-[#cccccc] mb-6 sm:mb-8">
               Contactez-nous dès maintenant pour un devis gratuit et personnalisé
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button size="lg">Demander un devis</Button>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto">Demander un devis</Button>
               </Link>
-              <Link href="/tarifs">
-                <Button size="lg" variant="ghost">
+              <Link href="/tarifs" className="w-full sm:w-auto">
+                <Button size="lg" variant="ghost" className="w-full sm:w-auto">
                   Voir les tarifs
                 </Button>
               </Link>

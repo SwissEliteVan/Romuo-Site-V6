@@ -95,11 +95,11 @@ export default function Services() {
       {/* Hero Section */}
       <Section spacing="lg" className="bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a]">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <div className="text-center max-w-3xl mx-auto px-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
               Nos <span className="text-[#d4af37]">services</span>
             </h1>
-            <p className="text-lg md:text-xl text-[#cccccc] leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-[#cccccc] leading-relaxed">
               Un service adapté à chaque besoin, avec la même exigence de qualité
               et de professionnalisme
             </p>
@@ -121,32 +121,32 @@ export default function Services() {
           >
             <Container>
               <div
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${
                   !isEven && 'lg:grid-flow-dense'
                 }`}
               >
-                <div className={!isEven ? 'lg:col-start-2' : ''}>
-                  <Icon className="h-12 w-12 text-[#d4af37] mb-4" aria-hidden="true" />
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4">{service.title}</h2>
-                  <p className="text-lg text-[#cccccc] mb-6 leading-relaxed">
+                <div className={`px-4 sm:px-0 ${!isEven ? 'lg:col-start-2' : ''}`}>
+                  <Icon className="h-10 w-10 sm:h-12 sm:w-12 text-[#d4af37] mb-3 sm:mb-4" aria-hidden="true" />
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">{service.title}</h2>
+                  <p className="text-base sm:text-lg text-[#cccccc] mb-4 sm:mb-6 leading-relaxed">
                     {service.details}
                   </p>
-                  <ul className="space-y-2 mb-8">
+                  <ul className="space-y-2 mb-6 sm:mb-8">
                     {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-[#ffffff]">
-                        <ArrowRight className="h-5 w-5 text-[#d4af37]" aria-hidden="true" />
+                      <li key={feature} className="flex items-center gap-2 text-sm sm:text-base text-[#ffffff]">
+                        <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 text-[#d4af37] flex-shrink-0" aria-hidden="true" />
                         {feature}
                       </li>
                     ))}
                   </ul>
-                  <Link href="/contact">
-                    <Button>Demander un devis</Button>
+                  <Link href="/contact" className="block sm:inline-block">
+                    <Button className="w-full sm:w-auto">Demander un devis</Button>
                   </Link>
                 </div>
-                <div className={!isEven ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                  <Card variant="glass" className="p-8">
+                <div className={`px-4 sm:px-0 ${!isEven ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                  <Card variant="glass" className="p-6 sm:p-8">
                     <div className="aspect-video bg-gradient-to-br from-[#d4af37]/20 to-transparent rounded-sm flex items-center justify-center">
-                      <Icon className="h-24 w-24 text-[#d4af37] opacity-50" aria-hidden="true" />
+                      <Icon className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 text-[#d4af37] opacity-50" aria-hidden="true" />
                     </div>
                   </Card>
                 </div>
@@ -159,19 +159,19 @@ export default function Services() {
       {/* CTA Section */}
       <Section variant="dark" spacing="md" className="border-t border-[#2d3748]">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="text-center max-w-3xl mx-auto px-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
               Un service sur mesure ?
             </h2>
-            <p className="text-lg text-[#cccccc] mb-8">
+            <p className="text-base sm:text-lg text-[#cccccc] mb-6 sm:mb-8">
               Vous avez un besoin spécifique ? Contactez-nous pour discuter de votre projet
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button size="lg">Nous contacter</Button>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto">Nous contacter</Button>
               </Link>
-              <a href="tel:+41760842089">
-                <Button size="lg" variant="secondary">
+              <a href="tel:+41760842089" className="w-full sm:w-auto">
+                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
                   076 084 20 89
                 </Button>
               </a>

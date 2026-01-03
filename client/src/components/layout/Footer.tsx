@@ -29,17 +29,17 @@ export default function Footer() {
         Footer
       </h2>
       <Container>
-        <div className="py-16">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
+        <div className="py-10 sm:py-12 md:py-16 px-4">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Colonne 1 : À propos */}
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div className="flex items-center gap-2">
-                <div className="h-10 w-10 border-2 border-[#d4af37] flex items-center justify-center">
-                  <span className="text-xl font-bold text-[#d4af37]">R</span>
+                <div className="h-8 w-8 sm:h-10 sm:w-10 border-2 border-[#d4af37] flex items-center justify-center">
+                  <span className="text-lg sm:text-xl font-bold text-[#d4af37]">R</span>
                 </div>
-                <span className="text-xl font-bold text-[#ffffff]">ROMUO VTC</span>
+                <span className="text-lg sm:text-xl font-bold text-[#ffffff]">ROMUO VTC</span>
               </div>
-              <p className="text-sm text-[#999999] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#999999] leading-relaxed">
                 Service de transport premium en Suisse. Confort, ponctualité et discrétion pour tous vos déplacements.
               </p>
             </div>
@@ -127,8 +127,8 @@ export default function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-12 pt-8 border-t border-[#2d3748]">
-            <p className="text-sm text-center text-[#666666]">
+          <div className="mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 border-t border-[#2d3748]">
+            <p className="text-xs sm:text-sm text-center text-[#666666] leading-relaxed">
               © {currentYear} ROMUO VTC. Tous droits réservés. Service de transport de personnes en Suisse.
             </p>
           </div>

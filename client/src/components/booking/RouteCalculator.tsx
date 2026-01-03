@@ -121,16 +121,16 @@ export default function RouteCalculator() {
   };
 
   return (
-    <Card variant="glass" className="p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Navigation className="h-6 w-6 text-[#d4af37]" aria-hidden="true" />
-        <h3 className="text-2xl font-bold">Calculer un devis</h3>
+    <Card variant="glass" className="p-4 sm:p-6">
+      <div className="flex items-center gap-2 mb-3 sm:mb-4">
+        <Navigation className="h-5 w-5 sm:h-6 sm:w-6 text-[#d4af37]" aria-hidden="true" />
+        <h3 className="text-xl sm:text-2xl font-bold">Calculer un devis</h3>
       </div>
 
       {!hasApiKey && (
-        <div className="mb-4 p-3 bg-yellow-500/10 border-l-4 border-yellow-500 text-yellow-200 text-sm">
+        <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-yellow-500/10 border-l-4 border-yellow-500 text-yellow-200 text-xs sm:text-sm">
           <div className="flex items-start gap-2">
-            <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <strong>Mode démonstration :</strong> La clé API Google Maps n'est pas configurée.
               Le calcul utilise une estimation basique. Pour un devis précis, contactez-nous directement.
@@ -163,46 +163,46 @@ export default function RouteCalculator() {
       </form>
 
       {error && (
-        <div className="mt-4 p-3 bg-red-500/10 border-l-4 border-red-500 text-red-200 text-sm">
+        <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-red-500/10 border-l-4 border-red-500 text-red-200 text-xs sm:text-sm">
           {error}
         </div>
       )}
 
       {estimate && (
-        <div className="mt-6 space-y-4">
+        <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-4">
           <div className="h-px bg-[#2d3748]" />
 
           <div>
-            <h4 className="text-lg font-bold mb-3">Estimation du trajet</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="flex items-center gap-3 p-3 bg-[#1a1a1a] rounded-sm border border-[#2d3748]">
-                <MapPin className="h-8 w-8 text-[#d4af37]" aria-hidden="true" />
+            <h4 className="text-base sm:text-lg font-bold mb-2 sm:mb-3">Estimation du trajet</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+              <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-[#1a1a1a] rounded-sm border border-[#2d3748]">
+                <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-[#d4af37] flex-shrink-0" aria-hidden="true" />
                 <div>
-                  <p className="text-sm text-[#999999]">Distance</p>
-                  <p className="text-xl font-bold">{estimate.distance} km</p>
+                  <p className="text-xs sm:text-sm text-[#999999]">Distance</p>
+                  <p className="text-lg sm:text-xl font-bold">{estimate.distance} km</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-3 bg-[#1a1a1a] rounded-sm border border-[#2d3748]">
-                <Clock className="h-8 w-8 text-[#d4af37]" aria-hidden="true" />
+              <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-[#1a1a1a] rounded-sm border border-[#2d3748]">
+                <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-[#d4af37] flex-shrink-0" aria-hidden="true" />
                 <div>
-                  <p className="text-sm text-[#999999]">Durée estimée</p>
-                  <p className="text-xl font-bold">{estimate.duration} min</p>
+                  <p className="text-xs sm:text-sm text-[#999999]">Durée estimée</p>
+                  <p className="text-lg sm:text-xl font-bold">{estimate.duration} min</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-3 bg-[#d4af37]/10 rounded-sm border border-[#d4af37]">
-                <DollarSign className="h-8 w-8 text-[#d4af37]" aria-hidden="true" />
+              <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-[#d4af37]/10 rounded-sm border border-[#d4af37]">
+                <DollarSign className="h-6 w-6 sm:h-8 sm:w-8 text-[#d4af37] flex-shrink-0" aria-hidden="true" />
                 <div>
-                  <p className="text-sm text-[#d4af37]">Prix estimé</p>
-                  <p className="text-xl font-bold text-[#d4af37]">{estimate.price} CHF</p>
+                  <p className="text-xs sm:text-sm text-[#d4af37]">Prix estimé</p>
+                  <p className="text-lg sm:text-xl font-bold text-[#d4af37]">{estimate.price} CHF</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="p-4 bg-[#1a1a1a] border border-[#2d3748] rounded-sm">
-            <p className="text-sm text-[#cccccc] mb-3">
+          <div className="p-3 sm:p-4 bg-[#1a1a1a] border border-[#2d3748] rounded-sm">
+            <p className="text-xs sm:text-sm text-[#cccccc] mb-3">
               <strong className="text-[#ffffff]">Tarif indicatif</strong> calculé sur la base
               de la distance et de la durée estimée. Le tarif final peut varier selon le trafic,
               l'heure de la journée et vos besoins spécifiques.
@@ -221,8 +221,8 @@ export default function RouteCalculator() {
         </div>
       )}
 
-      <div className="mt-6 text-center">
-        <p className="text-sm text-[#666666]">
+      <div className="mt-4 sm:mt-6 text-center">
+        <p className="text-xs sm:text-sm text-[#666666]">
           Pour un devis personnalisé précis :{' '}
           <a href="tel:+41760842089" className="text-[#d4af37] hover:underline">
             076 084 20 89
