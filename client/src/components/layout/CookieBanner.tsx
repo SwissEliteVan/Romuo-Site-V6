@@ -3,6 +3,13 @@ import { X, Cookie } from 'lucide-react';
 import { Link } from 'wouter';
 import Button from '../ui/Button';
 
+// Déclaration TypeScript pour window.gtag
+declare global {
+  interface Window {
+    gtag?: (command: string, action: string, params: Record<string, string>) => void;
+  }
+}
+
 export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -21,36 +28,40 @@ export default function CookieBanner() {
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem('romuo-cookie-consent', 'accepted');
+    const consent = {
+      analytics: true,
+      preferences: true,
+      timestamp: new Date().toISOString(),
+    };
+    localStorage.setItem('romuo-cookie-consent', JSON.stringify(consent));
     localStorage.setItem('romuo-cookie-consent-date', new Date().toISOString());
     setIsVisible(false);
 
-    // Initialiser Google Analytics 4 si configuré
-    if (import.meta.env.VITE_GA4_MEASUREMENT_ID) {
-      // @ts-ignore
-      if (window.gtag) {
-        // @ts-ignore
-        window.gtag('consent', 'update', {
-          analytics_storage: 'granted'
-        });
-      }
+    // Mettre à jour le consent mode pour GTM et GA4
+    if (window.gtag) {
+      window.gtag('consent', 'update', {
+        analytics_storage: 'granted',
+        ad_storage: 'denied',
+      });
     }
   };
 
   const handleDecline = () => {
-    localStorage.setItem('romuo-cookie-consent', 'declined');
+    const consent = {
+      analytics: false,
+      preferences: false,
+      timestamp: new Date().toISOString(),
+    };
+    localStorage.setItem('romuo-cookie-consent', JSON.stringify(consent));
     localStorage.setItem('romuo-cookie-consent-date', new Date().toISOString());
     setIsVisible(false);
 
-    // Désactiver Google Analytics 4 si configuré
-    if (import.meta.env.VITE_GA4_MEASUREMENT_ID) {
-      // @ts-ignore
-      if (window.gtag) {
-        // @ts-ignore
-        window.gtag('consent', 'update', {
-          analytics_storage: 'denied'
-        });
-      }
+    // Refuser le consent pour GTM et GA4
+    if (window.gtag) {
+      window.gtag('consent', 'update', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+      });
     }
   };
 
