@@ -265,7 +265,7 @@ export default function Contact() {
                 </p>
               </form>
             </Card>
->>>>>>> origin/claude/vtc-app-mvp-4FF0V
+
           </div>
         </Container>
       </Section>
