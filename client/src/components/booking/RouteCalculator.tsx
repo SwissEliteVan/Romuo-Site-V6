@@ -18,8 +18,8 @@ export default function RouteCalculator() {
   const [isCalculating, setIsCalculating] = useState(false);
   const [error, setError] = useState('');
 
-  const MAPS_API_KEY = import.meta.env.VITE_MAPS_KEY || '';
-  const hasApiKey = MAPS_API_KEY && MAPS_API_KEY !== '' && MAPS_API_KEY !== 'YOUR_API_KEY_HERE';
+  const TOMTOM_API_KEY = import.meta.env.VITE_TOMTOM_API_KEY || '';
+  const hasApiKey = TOMTOM_API_KEY && TOMTOM_API_KEY !== '' && TOMTOM_API_KEY !== 'YOUR_API_KEY_HERE';
 
   // Calcul basique de tarif (à ajuster selon vos vrais tarifs)
   const calculatePrice = (distanceKm: number, durationMin: number): number => {
@@ -32,6 +32,85 @@ export default function RouteCalculator() {
     const pricePerMin = 1;
 
     return basePrice + (distanceKm * pricePerKm) + (durationMin * pricePerMin);
+  };
+
+  // Géocoder une adresse avec TomTom Search API
+  const geocodeAddress = async (address: string): Promise<{ lat: number; lng: number } | null> => {
+    try {
+      const response = await fetch(
+        `https://api.tomtom.com/search/2/search/${encodeURIComponent(address)}.json?key=${TOMTOM_API_KEY}&countrySet=CH&limit=1`
+      );
+
+      if (!response.ok) {
+        throw new Error('Geocoding failed');
+      }
+
+      const data = await response.json();
+
+      if (data.results && data.results.length > 0) {
+        const position = data.results[0].position;
+        return { lat: position.lat, lng: position.lon };
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Geocoding error:', error);
+      return null;
+    }
+  };
+
+  // Calculer l'itinéraire avec TomTom Routing API
+  const calculateRouteWithTomTom = async () => {
+    setIsCalculating(true);
+    setError('');
+    setEstimate(null);
+
+    try {
+      // Géocoder les deux adresses
+      const [depCoords, arrCoords] = await Promise.all([
+        geocodeAddress(departure),
+        geocodeAddress(arrival),
+      ]);
+
+      if (!depCoords || !arrCoords) {
+        throw new Error('Impossible de localiser une ou plusieurs adresses');
+      }
+
+      // Calculer l'itinéraire
+      const routeResponse = await fetch(
+        `https://api.tomtom.com/routing/1/calculateRoute/${depCoords.lat},${depCoords.lng}:${arrCoords.lat},${arrCoords.lng}/json?key=${TOMTOM_API_KEY}`
+      );
+
+      if (!routeResponse.ok) {
+        throw new Error('Routing failed');
+      }
+
+      const routeData = await routeResponse.json();
+
+      if (routeData.routes && routeData.routes.length > 0) {
+        const route = routeData.routes[0];
+        const summary = route.summary;
+
+        const distanceKm = summary.lengthInMeters / 1000;
+        const durationMin = Math.round(summary.travelTimeInSeconds / 60);
+        const price = Math.round(calculatePrice(distanceKm, durationMin));
+
+        setEstimate({
+          distance: Math.round(distanceKm),
+          duration: durationMin,
+          price,
+        });
+
+        trackRouteCalculated(distanceKm);
+      } else {
+        throw new Error('No route found');
+      }
+    } catch (err) {
+      console.error('Route calculation error:', err);
+      setError('Impossible de calculer l\'itinéraire. Veuillez vérifier les adresses ou contactez-nous directement.');
+    } finally {
+      setIsCalculating(false);
+    }
   };
 
   const calculateRouteSimple = async () => {
@@ -112,9 +191,7 @@ export default function RouteCalculator() {
     }
 
     if (hasApiKey) {
-      // TODO: Implémenter l'appel réel à Google Maps Distance Matrix API
-      // ou Mapbox Directions API avec la clé fournie
-      calculateRouteSimple();
+      calculateRouteWithTomTom();
     } else {
       calculateRouteSimple();
     }
@@ -132,7 +209,7 @@ export default function RouteCalculator() {
           <div className="flex items-start gap-2">
             <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
-              <strong>Mode démonstration :</strong> La clé API Google Maps n'est pas configurée.
+              <strong>Mode démonstration :</strong> La clé API TomTom n'est pas configurée.
               Le calcul utilise une estimation basique. Pour un devis précis, contactez-nous directement.
             </div>
           </div>
