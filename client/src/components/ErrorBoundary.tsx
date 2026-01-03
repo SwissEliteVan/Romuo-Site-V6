@@ -33,7 +33,7 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
       errorInfo,
     });
 
-    // Envoyer l'erreur à un service de monitoring (Sentry, etc.)
+    // Envoyer l'erreur Ã  un service de monitoring (Sentry, etc.)
     // if (import.meta.env.PROD) {
     //   // Sentry.captureException(error, { extra: errorInfo });
     // }
@@ -59,14 +59,14 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
                 Une erreur est survenue
               </h1>
               <p className="text-sm sm:text-base text-[#cccccc] mb-6">
-                Nous sommes désolés, quelque chose s'est mal passé. Notre équipe a été notifiée
-                et travaille sur le problème.
+                Nous sommes dÃ©solÃ©s, quelque chose s'est mal passÃ©. Notre Ã©quipe a Ã©tÃ© notifiÃ©e
+                et travaille sur le problÃ¨me.
               </p>
 
               {import.meta.env.DEV && this.state.error && (
                 <details className="mb-6 text-left">
                   <summary className="cursor-pointer text-sm text-[#d4af37] hover:underline mb-2">
-                    Détails techniques (mode développement)
+                    DÃ©tails techniques (mode dÃ©veloppement)
                   </summary>
                   <div className="bg-[#1a1a1a] border border-[#2d3748] rounded p-4 text-xs text-[#cccccc] overflow-auto max-h-60">
                     <p className="font-bold text-red-400 mb-2">{this.state.error.toString()}</p>
@@ -80,7 +80,7 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button onClick={this.handleReset} size="lg" className="w-full sm:w-auto">
                   <RefreshCw className="mr-2 h-5 w-5" />
-                  Retour à l'accueil
+                  Retour Ã  l'accueil
                 </Button>
                 <a href="tel:+41760842089" className="w-full sm:w-auto">
                   <Button variant="secondary" size="lg" className="w-full">
@@ -91,7 +91,7 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
             </div>
 
             <p className="text-xs text-[#666666] mt-8">
-              Si le problème persiste, contactez-nous au{' '}
+              Si le problÃ¨me persiste, contactez-nous au{' '}
               <a href="tel:+41760842089" className="text-[#d4af37] hover:underline">
                 076 084 20 89
               </a>
