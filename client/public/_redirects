@@ -1,0 +1,10 @@
+# Redirections pour SPA routing (Netlify/Vercel)
+# Toutes les routes non-fichiers doivent servir index.html
+/*    /index.html   200
+
+# Redirections HTTP vers HTTPS (si non géré par l'hébergeur)
+http://romuo-vtc.ch/*    https://romuo-vtc.ch/:splat    301!
+http://www.romuo-vtc.ch/*    https://romuo-vtc.ch/:splat    301!
+
+# Redirection www vers non-www
+https://www.romuo-vtc.ch/*    https://romuo-vtc.ch/:splat    301!
