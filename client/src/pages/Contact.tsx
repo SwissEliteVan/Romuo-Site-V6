@@ -273,19 +273,33 @@ export default function Contact() {
         </Container>
       </Section>
 
-      {/* Zone desservie */}
-      <Section variant="light" spacing="md">
+        </Container>
+      </Section>
+
+      {/* Calculateur de devis */}
+      <Section variant="light" spacing="lg">
         <Container>
-          <div className="text-center max-w-3xl mx-auto px-4">
-            <MapPin className="h-10 w-10 sm:h-12 sm:w-12 text-[#d4af37] mx-auto mb-3 sm:mb-4" aria-hidden="true" />
-            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Zone d'intervention</h2>
-            <p className="text-sm sm:text-base text-[#cccccc] leading-relaxed">
-              Nous intervenons dans toute la Suisse romande (Genève, Lausanne, Montreux, Vevey, Nyon, etc.)
-              et proposons également des trajets longue distance vers toute la Suisse et les pays limitrophes.
-            </p>
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Estimez votre trajet</h2>
+              <p className="text-sm sm:text-base text-[#999999]">
+                Obtenez une estimation instantanée de distance, durée et tarif
+              </p>
+            </div>
+            <RouteCalculator />
+          </div>
+        </Container>
+      </Section>
+
+      {/* Formulaire de réservation complet */}
+      <Section spacing="lg">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <BookingForm />
           </div>
         </Container>
       </Section>
     </>
   );
 }
+
