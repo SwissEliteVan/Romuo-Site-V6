@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { ArrowRight, CheckCircle, MapPin, Clock, Shield, Star, Users, Car, Quote } from 'lucide-react';
+import { ArrowRight, CheckCircle, MapPin, Clock, Shield, Star, Users, Car, Quote, Phone } from 'lucide-react';
 import SEO from '../components/seo/SEO';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
@@ -143,32 +143,77 @@ export default function Home() {
         jsonLd={jsonLdData}
       />
 
-      {/* Hero Section */}
-      <Section spacing="lg" className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#d4af37]/10 to-transparent pointer-events-none" />
+      {/* Hero Section Premium */}
+      <Section spacing="lg" className="relative overflow-hidden min-h-[90vh] flex items-center pt-20">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#d4af37]/20 via-[#d4af37]/5 to-transparent pointer-events-none opacity-80"
+             style={{
+               backgroundSize: '200% 200%',
+               animation: 'gradientShift 15s ease infinite'
+             }}
+        />
+
+        {/* Radial glow effect */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#d4af37]/10 rounded-full blur-3xl pointer-events-none opacity-40" />
+
+        {/* Noise texture */}
+        <div className="absolute inset-0 noise-texture opacity-50" />
+
         <Container>
-          <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Votre <span className="text-[#d4af37]">chauffeur privé</span>
-              <br />
-              en Suisse
+          <div className="relative z-10 max-w-5xl mx-auto text-center">
+            {/* Title with stagger animation */}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1] tracking-tight">
+              <span className="block animate-fadeInDown opacity-0" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
+                Votre{' '}
+                <span className="text-gradient inline-block">
+                  chauffeur privé
+                </span>
+              </span>
+              <span className="block animate-fadeInDown opacity-0" style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}>
+                en Suisse
+              </span>
             </h1>
-            <p className="text-lg md:text-xl text-[#cccccc] mb-8 max-w-2xl mx-auto leading-relaxed">
-              Service VTC premium disponible 24/7. Confort, ponctualité et discrétion
-              pour tous vos déplacements professionnels et personnels.
+
+            {/* Description */}
+            <p className="text-xl md:text-2xl text-[#cccccc] mb-12 max-w-3xl mx-auto leading-relaxed animate-fadeInUp opacity-0"
+               style={{ animationDelay: '500ms', animationFillMode: 'forwards' }}>
+              Service VTC <span className="text-[#d4af37] font-semibold">premium</span> disponible 24/7.
+              <br className="hidden sm:block" />
+              Confort, ponctualité et discrétion pour tous vos déplacements.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+            {/* CTAs with glow */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fadeInUp opacity-0"
+                 style={{ animationDelay: '700ms', animationFillMode: 'forwards' }}>
               <Link href="/contact">
-                <Button size="lg" className="group">
+                <Button size="lg" className="group glow-gold-hover shadow-premium min-w-[250px]">
                   Réserver maintenant
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                 </Button>
               </Link>
               <a href="tel:+41760842089">
-                <Button size="lg" variant="secondary">
+                <Button size="lg" variant="secondary" className="glow-gold-hover min-w-[250px]">
+                  <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
                   076 084 20 89
                 </Button>
               </a>
+            </div>
+
+            {/* Trust indicators */}
+            <div className="mt-16 flex flex-wrap justify-center gap-8 md:gap-12 text-center animate-fadeInUp opacity-0"
+                 style={{ animationDelay: '900ms', animationFillMode: 'forwards' }}>
+              <div className="flex flex-col items-center">
+                <div className="text-3xl md:text-4xl font-bold text-[#d4af37] mb-1">24/7</div>
+                <div className="text-sm text-[#999999]">Disponible</div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="text-3xl md:text-4xl font-bold text-[#d4af37] mb-1">100%</div>
+                <div className="text-sm text-[#999999]">Premium</div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="text-3xl md:text-4xl font-bold text-[#d4af37] mb-1">5★</div>
+                <div className="text-sm text-[#999999]">Satisfaction</div>
+              </div>
             </div>
           </div>
         </Container>
