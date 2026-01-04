@@ -12,11 +12,14 @@ export default function MentionsLegales() {
         noindex={true}
       />
 
-      <Section spacing="lg" className="bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a]">
+      <Section spacing="lg" className="relative bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a] overflow-hidden">
+        {/* Subtle radial glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#d4af37]/10 rounded-full blur-3xl" />
+
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto relative animate-fadeInUp">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Mentions <span className="text-[#d4af37]">légales</span>
+              Mentions <span className="text-gradient">légales</span>
             </h1>
             <p className="text-lg text-[#cccccc]">
               Informations juridiques et impressum
@@ -50,7 +53,7 @@ export default function MentionsLegales() {
               <div className="space-y-2 text-[#cccccc]">
                 <p><strong className="text-[#ffffff]">Hébergeur :</strong> Hostinger International Ltd.</p>
                 <p><strong className="text-[#ffffff]">Adresse :</strong> 61 Lordou Vironos Street, 6023 Larnaca, Cyprus</p>
-                <p><strong className="text-[#ffffff]">Site web :</strong> <a href="https://www.hostinger.com" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:underline">www.hostinger.com</a></p>
+                <p><strong className="text-[#ffffff]">Site web :</strong> <a href="https://www.hostinger.com" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:text-[#e4bf47] transition-colors relative group/link">www.hostinger.com<span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-[#d4af37] to-transparent group-hover/link:w-full transition-all duration-300" /></a></p>
               </div>
             </Card>
 
@@ -76,8 +79,9 @@ export default function MentionsLegales() {
               </p>
               <p className="text-[#cccccc] mt-3">
                 Pour plus d'informations, consultez notre{' '}
-                <a href="/confidentialite" className="text-[#d4af37] hover:underline">
+                <a href="/confidentialite" className="text-[#d4af37] hover:text-[#e4bf47] transition-colors relative group/link">
                   politique de confidentialité
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-[#d4af37] to-transparent group-hover/link:w-full transition-all duration-300" />
                 </a>.
               </p>
             </Card>
@@ -87,8 +91,9 @@ export default function MentionsLegales() {
               <p className="text-[#cccccc]">
                 Ce site utilise des cookies pour améliorer votre expérience de navigation
                 et analyser le trafic du site. Pour en savoir plus, consultez notre{' '}
-                <a href="/cookies" className="text-[#d4af37] hover:underline">
+                <a href="/cookies" className="text-[#d4af37] hover:text-[#e4bf47] transition-colors relative group/link">
                   politique relative aux cookies
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-[#d4af37] to-transparent group-hover/link:w-full transition-all duration-300" />
                 </a>.
               </p>
             </Card>
@@ -124,8 +129,10 @@ export default function MentionsLegales() {
               </p>
             </Card>
 
-            <div className="text-center text-sm text-[#666666] mt-8">
-              Dernière mise à jour : {new Date().toLocaleDateString('fr-CH')}
+            <div className="text-center mt-8 p-4 bg-[#1a1a1a] border-t border-[#2d3748]">
+              <p className="text-sm text-[#999999]">
+                Dernière mise à jour : <span className="text-[#d4af37] font-semibold">{new Date().toLocaleDateString('fr-CH')}</span>
+              </p>
             </div>
           </div>
         </Container>

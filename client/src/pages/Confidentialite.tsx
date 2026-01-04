@@ -12,11 +12,14 @@ export default function Confidentialite() {
         noindex={true}
       />
 
-      <Section spacing="lg" className="bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a]">
+      <Section spacing="lg" className="relative bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a] overflow-hidden">
+        {/* Subtle radial glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#d4af37]/10 rounded-full blur-3xl" />
+
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto relative animate-fadeInUp">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Politique de <span className="text-[#d4af37]">confidentialité</span>
+              Politique de <span className="text-gradient">confidentialité</span>
             </h1>
             <p className="text-lg text-[#cccccc]">
               Protection de vos données personnelles
@@ -157,7 +160,7 @@ export default function Confidentialite() {
                   <li><strong className="text-[#ffffff]">Droit de retrait du consentement :</strong> retirer votre consentement à tout moment</li>
                 </ul>
                 <p className="mt-4">
-                  Pour exercer vos droits, contactez-nous à : <strong className="text-[#d4af37]">contact@romuo-vtc.ch</strong>
+                  Pour exercer vos droits, contactez-nous à : <strong className="text-gradient">contact@romuo-vtc.ch</strong>
                 </p>
               </div>
             </Card>
@@ -195,8 +198,10 @@ export default function Confidentialite() {
               </p>
             </Card>
 
-            <div className="text-center text-sm text-[#666666] mt-8">
-              Dernière mise à jour : {new Date().toLocaleDateString('fr-CH')}
+            <div className="text-center mt-8 p-4 bg-[#1a1a1a] border-t border-[#2d3748]">
+              <p className="text-sm text-[#999999]">
+                Dernière mise à jour : <span className="text-[#d4af37] font-semibold">{new Date().toLocaleDateString('fr-CH')}</span>
+              </p>
             </div>
           </div>
         </Container>

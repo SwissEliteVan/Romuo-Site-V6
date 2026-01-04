@@ -12,11 +12,14 @@ export default function Cookies() {
         noindex={true}
       />
 
-      <Section spacing="lg" className="bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a]">
+      <Section spacing="lg" className="relative bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a] overflow-hidden">
+        {/* Subtle radial glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#d4af37]/10 rounded-full blur-3xl" />
+
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto relative animate-fadeInUp">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Politique relative aux <span className="text-[#d4af37]">cookies</span>
+              Politique relative aux <span className="text-gradient">cookies</span>
             </h1>
             <p className="text-lg text-[#cccccc]">
               Comment nous utilisons les cookies et comment les gérer
@@ -101,9 +104,10 @@ export default function Cookies() {
                       href="https://policies.google.com/privacy"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#d4af37] hover:underline text-sm"
+                      className="text-[#d4af37] hover:text-[#e4bf47] transition-colors text-sm relative group/link"
                     >
                       Politique de confidentialité Google
+                      <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-[#d4af37] to-transparent group-hover/link:w-full transition-all duration-300" />
                     </a>
                   </li>
                   <li>
@@ -153,9 +157,9 @@ export default function Cookies() {
                   </p>
                 </div>
 
-                <div className="mt-4 p-4 bg-[#d4af37]/10 border-l-4 border-[#d4af37]">
+                <div className="mt-4 p-4 bg-gradient-to-r from-[#d4af37]/10 to-[#d4af37]/5 border-l-4 border-[#d4af37] shadow-lg shadow-[#d4af37]/5">
                   <p className="text-sm">
-                    <strong className="text-[#ffffff]">Liens utiles pour gérer les cookies :</strong>
+                    <strong className="text-gradient">Liens utiles pour gérer les cookies :</strong>
                   </p>
                   <ul className="text-sm space-y-1 mt-2">
                     <li>
@@ -163,9 +167,10 @@ export default function Cookies() {
                         href="https://support.google.com/chrome/answer/95647"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#d4af37] hover:underline"
+                        className="text-[#d4af37] hover:text-[#e4bf47] transition-colors relative group/link"
                       >
                         Google Chrome
+                        <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-[#d4af37] to-transparent group-hover/link:w-full transition-all duration-300" />
                       </a>
                     </li>
                     <li>
@@ -173,9 +178,10 @@ export default function Cookies() {
                         href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#d4af37] hover:underline"
+                        className="text-[#d4af37] hover:text-[#e4bf47] transition-colors relative group/link"
                       >
                         Mozilla Firefox
+                        <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-[#d4af37] to-transparent group-hover/link:w-full transition-all duration-300" />
                       </a>
                     </li>
                     <li>
@@ -183,9 +189,10 @@ export default function Cookies() {
                         href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#d4af37] hover:underline"
+                        className="text-[#d4af37] hover:text-[#e4bf47] transition-colors relative group/link"
                       >
                         Safari
+                        <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-[#d4af37] to-transparent group-hover/link:w-full transition-all duration-300" />
                       </a>
                     </li>
                     <li>
@@ -193,9 +200,10 @@ export default function Cookies() {
                         href="https://support.microsoft.com/fr-fr/microsoft-edge/supprimer-les-cookies-dans-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#d4af37] hover:underline"
+                        className="text-[#d4af37] hover:text-[#e4bf47] transition-colors relative group/link"
                       >
                         Microsoft Edge
+                        <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-[#d4af37] to-transparent group-hover/link:w-full transition-all duration-300" />
                       </a>
                     </li>
                   </ul>
@@ -235,8 +243,10 @@ export default function Cookies() {
               </ul>
             </Card>
 
-            <div className="text-center text-sm text-[#666666] mt-8">
-              Dernière mise à jour : {new Date().toLocaleDateString('fr-CH')}
+            <div className="text-center mt-8 p-4 bg-[#1a1a1a] border-t border-[#2d3748]">
+              <p className="text-sm text-[#999999]">
+                Dernière mise à jour : <span className="text-[#d4af37] font-semibold">{new Date().toLocaleDateString('fr-CH')}</span>
+              </p>
             </div>
           </div>
         </Container>
