@@ -219,26 +219,38 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* Services Section */}
+      {/* Services Section Premium */}
       <Section variant="light" spacing="lg">
         <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Nos services</h2>
-            <p className="text-lg text-[#999999] max-w-2xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              Nos <span className="text-gradient">services</span>
+            </h2>
+            <p className="text-lg md:text-xl text-[#999999] max-w-2xl mx-auto leading-relaxed">
               Un service adapté à chaque besoin, avec la même exigence de qualité
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {services.map((service, index) => {
               const Icon = service.icon;
               return (
                 <Link key={service.title} href={service.href}>
-                  <Card className="h-full hover:border-[#d4af37] transition-all duration-300 cursor-pointer group">
-                    <Icon className="h-10 w-10 text-[#d4af37] mb-4 group-hover:scale-110 transition-transform" aria-hidden="true" />
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-[#d4af37] transition-colors">
+                  <Card
+                    className="h-full cursor-pointer group"
+                    style={{
+                      animation: 'scaleIn 0.6s ease-out forwards',
+                      animationDelay: `${index * 100}ms`,
+                      opacity: 0
+                    }}
+                  >
+                    <Icon
+                      className="h-12 w-12 text-[#d4af37] mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all animate-float"
+                      aria-hidden="true"
+                    />
+                    <h3 className="text-xl font-bold mb-3 group-hover:text-[#d4af37] transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-[#999999] text-sm leading-relaxed">
+                    <p className="text-[#999999] leading-relaxed">
                       {service.description}
                     </p>
                   </Card>
@@ -296,46 +308,58 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* Notre flotte */}
+      {/* Notre flotte Premium */}
       <Section variant="light" spacing="lg">
         <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Notre flotte de véhicules</h2>
-            <p className="text-lg text-[#999999] max-w-2xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              Notre <span className="text-gradient">flotte</span> de véhicules
+            </h2>
+            <p className="text-lg md:text-xl text-[#999999] max-w-2xl mx-auto leading-relaxed">
               Des véhicules premium récents, entretenus avec soin pour votre confort
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {vehicles.map((vehicle) => (
-              <Card key={vehicle.name} className="hover:border-[#d4af37] transition-all duration-300 group">
-                <div className="mb-4 aspect-video bg-gradient-to-br from-[#d4af37]/10 to-[#0a0a0a] border border-[#2d3748] flex items-center justify-center group-hover:from-[#d4af37]/20 transition-all">
-                  <Car className="h-20 w-20 text-[#d4af37] opacity-60" aria-hidden="true" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {vehicles.map((vehicle, index) => (
+              <Card
+                key={vehicle.name}
+                className="group"
+                style={{
+                  animation: 'fadeInUp 0.8s ease-out forwards',
+                  animationDelay: `${index * 150}ms`,
+                  opacity: 0
+                }}
+              >
+                <div className="mb-6 aspect-video bg-gradient-to-br from-[#d4af37]/10 to-[#0a0a0a] border border-[#2d3748] flex items-center justify-center group-hover:from-[#d4af37]/20 transition-all shadow-inner overflow-hidden relative">
+                  {/* Subtle shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent group-hover:via-white/10 transition-all"></div>
+                  <Car className="h-24 w-24 text-[#d4af37] opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all animate-float" aria-hidden="true" />
                 </div>
-                <div className="inline-block px-3 py-1 bg-[#d4af37]/10 text-[#d4af37] text-xs font-bold mb-3 border border-[#d4af37]/30">
+                <div className="inline-block px-3 py-1.5 bg-gradient-to-r from-[#d4af37]/10 to-[#e4bf47]/10 text-[#d4af37] text-xs font-bold mb-4 border border-[#d4af37]/30 shadow-sm">
                   {vehicle.category}
                 </div>
-                <h3 className="text-2xl font-bold mb-2 group-hover:text-[#d4af37] transition-colors">
+                <h3 className="text-2xl font-bold mb-3 group-hover:text-gradient transition-all">
                   {vehicle.name}
                 </h3>
-                <p className="text-[#999999] text-sm mb-4 leading-relaxed">
+                <p className="text-[#999999] mb-6 leading-relaxed">
                   {vehicle.description}
                 </p>
-                <div className="flex gap-4 mb-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4 text-[#d4af37]" aria-hidden="true" />
-                    <span className="text-[#cccccc]">{vehicle.capacity}</span>
+                <div className="flex gap-4 mb-6">
+                  <div className="flex items-center gap-2 bg-[#0a0a0a]/50 px-3 py-2 rounded-sm border border-[#2d3748]">
+                    <Users className="h-5 w-5 text-[#d4af37]" aria-hidden="true" />
+                    <span className="text-[#cccccc] font-medium">{vehicle.capacity}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-[#d4af37]" aria-hidden="true" />
-                    <span className="text-[#cccccc]">{vehicle.luggage}</span>
+                  <div className="flex items-center gap-2 bg-[#0a0a0a]/50 px-3 py-2 rounded-sm border border-[#2d3748]">
+                    <MapPin className="h-5 w-5 text-[#d4af37]" aria-hidden="true" />
+                    <span className="text-[#cccccc] font-medium">{vehicle.luggage}</span>
                   </div>
                 </div>
-                <div className="border-t border-[#2d3748] pt-4">
+                <div className="border-t border-[#2d3748] pt-5">
                   <div className="flex flex-wrap gap-2">
                     {vehicle.features.map((feature) => (
                       <span
                         key={feature}
-                        className="text-xs px-2 py-1 bg-[#1a1a1a] border border-[#2d3748] text-[#cccccc]"
+                        className="text-xs px-3 py-1.5 bg-[#1a1a1a] border border-[#2d3748] text-[#cccccc] hover:border-[#d4af37]/30 hover:text-[#d4af37] transition-colors"
                       >
                         {feature}
                       </span>
@@ -348,35 +372,48 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* Témoignages clients */}
+      {/* Témoignages clients Premium */}
       <Section spacing="lg">
         <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ce que disent nos <span className="text-[#d4af37]">clients</span>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              Ce que disent nos <span className="text-gradient">clients</span>
             </h2>
-            <p className="text-lg text-[#999999] max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-[#999999] max-w-2xl mx-auto leading-relaxed">
               Votre satisfaction est notre priorité
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial) => (
-              <Card key={testimonial.name} variant="glass" className="hover:border-[#d4af37] transition-all">
-                <div className="mb-4">
-                  <Quote className="h-8 w-8 text-[#d4af37] opacity-50" aria-hidden="true" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card
+                key={testimonial.name}
+                variant="glass"
+                style={{
+                  animation: 'fadeInUp 0.8s ease-out forwards',
+                  animationDelay: `${index * 150}ms`,
+                  opacity: 0
+                }}
+              >
+                <div className="mb-6">
+                  <Quote className="h-10 w-10 text-[#d4af37] opacity-50 group-hover:opacity-70 transition-opacity" aria-hidden="true" />
                 </div>
-                <div className="flex mb-3">
+                <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-[#d4af37] fill-[#d4af37]" aria-hidden="true" />
+                    <Star
+                      key={i}
+                      className="h-5 w-5 text-[#d4af37] fill-[#d4af37] animate-scaleIn"
+                      style={{ animationDelay: `${index * 150 + i * 50}ms` }}
+                      aria-hidden="true"
+                    />
                   ))}
                 </div>
-                <p className="text-[#cccccc] mb-4 leading-relaxed italic">
+                <p className="text-[#cccccc] mb-6 leading-relaxed italic text-lg">
                   "{testimonial.text}"
                 </p>
-                <div className="border-t border-[#2d3748] pt-4">
-                  <p className="font-bold text-[#ffffff]">{testimonial.name}</p>
-                  <p className="text-sm text-[#999999]">{testimonial.location}</p>
-                  <p className="text-xs text-[#666666] mt-1">{testimonial.date}</p>
+                <div className="border-t border-[#2d3748]/50 pt-5 mt-auto">
+                  <p className="font-bold text-[#ffffff] text-lg">{testimonial.name}</p>
+                  <p className="text-sm text-[#999999] mt-1">{testimonial.location}</p>
+                  <p className="text-xs text-[#666666] mt-2">{testimonial.date}</p>
                 </div>
               </Card>
             ))}
