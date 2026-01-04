@@ -128,20 +128,24 @@ export default function BookingForm() {
 
   return (
     <Card variant="glass" className="p-6 md:p-8">
-      <div className="mb-6">
-        <h2 className="text-3xl font-bold mb-2">Réserver un trajet</h2>
-        <p className="text-[#999999]">
+      <div className="mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold mb-3">
+          Réserver un <span className="text-gradient">trajet</span>
+        </h2>
+        <p className="text-[#999999] text-lg">
           Remplissez le formulaire ci-dessous pour recevoir une confirmation rapide
         </p>
       </div>
 
       {submitStatus === 'success' && (
-        <div className="mb-6 p-4 bg-green-500/10 border-l-4 border-green-500 text-green-200">
+        <div className="mb-6 p-5 bg-gradient-to-r from-green-500/10 to-green-600/5 border-l-4 border-green-500 text-green-200 shadow-lg shadow-green-500/10 animate-fadeInUp">
           <div className="flex items-start gap-3">
-            <CheckCircle className="h-6 w-6 flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="flex-shrink-0">
+              <CheckCircle className="h-6 w-6 mt-0.5 animate-scaleIn" aria-hidden="true" />
+            </div>
             <div>
-              <strong>Demande envoyée avec succès !</strong>
-              <p className="text-sm mt-1">
+              <strong className="text-lg">Demande envoyée avec succès !</strong>
+              <p className="text-sm mt-1 leading-relaxed">
                 Nous vous contacterons dans les plus brefs délais pour confirmer votre réservation.
               </p>
             </div>
@@ -150,12 +154,14 @@ export default function BookingForm() {
       )}
 
       {submitStatus === 'error' && (
-        <div className="mb-6 p-4 bg-red-500/10 border-l-4 border-red-500 text-red-200">
+        <div className="mb-6 p-5 bg-gradient-to-r from-red-500/10 to-red-600/5 border-l-4 border-red-500 text-red-200 shadow-lg shadow-red-500/10 animate-fadeInUp">
           <div className="flex items-start gap-3">
-            <AlertCircle className="h-6 w-6 flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="flex-shrink-0">
+              <AlertCircle className="h-6 w-6 mt-0.5 animate-pulse" aria-hidden="true" />
+            </div>
             <div>
-              <strong>Erreur lors de l'envoi</strong>
-              <p className="text-sm mt-1">
+              <strong className="text-lg">Erreur lors de l'envoi</strong>
+              <p className="text-sm mt-1 leading-relaxed">
                 Veuillez réessayer ou nous contacter directement au 076 084 20 89.
               </p>
             </div>
@@ -225,8 +231,8 @@ export default function BookingForm() {
               min={today}
               required
               className={`w-full px-4 py-3 bg-[#1a1a1a] border-2 ${
-                errors.date ? 'border-red-500' : 'border-[#2d3748]'
-              } text-[#ffffff] focus:border-[#d4af37] focus:outline-none transition-colors`}
+                errors.date ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20 focus:shadow-red-500/10' : 'border-[#2d3748] focus:border-[#d4af37] focus:ring-[#d4af37]/20 focus:shadow-[#d4af37]/10 hover:border-[#d4af37]/50'
+              } text-[#ffffff] focus:outline-none focus:ring-2 focus:shadow-lg transition-all duration-300 cursor-pointer`}
             />
             {errors.date && <p className="mt-1 text-sm text-red-400">{errors.date}</p>}
           </div>
@@ -241,8 +247,8 @@ export default function BookingForm() {
               onChange={(e) => handleChange('time', e.target.value)}
               required
               className={`w-full px-4 py-3 bg-[#1a1a1a] border-2 ${
-                errors.time ? 'border-red-500' : 'border-[#2d3748]'
-              } text-[#ffffff] focus:border-[#d4af37] focus:outline-none transition-colors`}
+                errors.time ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20 focus:shadow-red-500/10' : 'border-[#2d3748] focus:border-[#d4af37] focus:ring-[#d4af37]/20 focus:shadow-[#d4af37]/10 hover:border-[#d4af37]/50'
+              } text-[#ffffff] focus:outline-none focus:ring-2 focus:shadow-lg transition-all duration-300 cursor-pointer`}
             />
             {errors.time && <p className="mt-1 text-sm text-red-400">{errors.time}</p>}
           </div>
@@ -258,7 +264,7 @@ export default function BookingForm() {
             <select
               value={formData.passengers}
               onChange={(e) => handleChange('passengers', e.target.value)}
-              className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2d3748] text-[#ffffff] focus:border-[#d4af37] focus:outline-none transition-colors"
+              className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2d3748] text-[#ffffff] focus:border-[#d4af37] focus:outline-none focus:ring-2 focus:ring-[#d4af37]/20 focus:shadow-lg focus:shadow-[#d4af37]/10 hover:border-[#d4af37]/50 transition-all duration-300 cursor-pointer"
             >
               {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                 <option key={num} value={num}>
@@ -275,7 +281,7 @@ export default function BookingForm() {
             <select
               value={formData.luggage}
               onChange={(e) => handleChange('luggage', e.target.value)}
-              className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2d3748] text-[#ffffff] focus:border-[#d4af37] focus:outline-none transition-colors"
+              className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2d3748] text-[#ffffff] focus:border-[#d4af37] focus:outline-none focus:ring-2 focus:ring-[#d4af37]/20 focus:shadow-lg focus:shadow-[#d4af37]/10 hover:border-[#d4af37]/50 transition-all duration-300 cursor-pointer"
             >
               {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                 <option key={num} value={num}>
@@ -327,7 +333,7 @@ export default function BookingForm() {
                 onChange={(e) => handleChange('message', e.target.value)}
                 placeholder="Informations complémentaires, demandes spéciales..."
                 rows={4}
-                className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2d3748] text-[#ffffff] focus:border-[#d4af37] focus:outline-none transition-colors resize-none"
+                className="w-full px-4 py-3 bg-[#1a1a1a] border-2 border-[#2d3748] text-[#ffffff] placeholder:text-[#666666] focus:border-[#d4af37] focus:outline-none focus:ring-2 focus:ring-[#d4af37]/20 focus:shadow-lg focus:shadow-[#d4af37]/10 hover:border-[#d4af37]/50 transition-all duration-300 resize-none"
               />
             </div>
           </div>
@@ -339,10 +345,33 @@ export default function BookingForm() {
             type="submit"
             fullWidth
             disabled={isSubmitting}
-            className="group text-lg py-4"
+            className="group text-lg py-4 relative overflow-hidden"
           >
             {isSubmitting ? (
-              'Envoi en cours...'
+              <div className="flex items-center justify-center gap-3">
+                <svg
+                  className="animate-spin h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  />
+                </svg>
+                <span>Envoi en cours...</span>
+              </div>
             ) : (
               <>
                 Envoyer la demande de réservation
@@ -350,7 +379,7 @@ export default function BookingForm() {
               </>
             )}
           </Button>
-          <p className="text-center text-sm text-[#666666] mt-4">
+          <p className="text-center text-sm text-[#666666] mt-4 leading-relaxed">
             En soumettant ce formulaire, vous acceptez d'être contacté par ROMUO VTC pour confirmer votre réservation.
           </p>
         </div>
