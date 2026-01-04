@@ -102,26 +102,34 @@ export default function Tarifs() {
 
             <Card variant="outline" className="mb-6 sm:mb-8">
               <div className="overflow-x-auto -mx-4 sm:mx-0">
-                <table className="w-full min-w-[500px]">
+                <table className="w-full min-w-[600px]">
                   <thead>
                     <tr className="border-b border-[#2d3748]">
-                      <th className="text-left py-3 sm:py-4 px-3 sm:px-4 font-semibold text-sm sm:text-base text-[#ffffff]">Trajet</th>
-                      <th className="text-right py-3 sm:py-4 px-3 sm:px-4 font-semibold text-sm sm:text-base text-[#ffffff]">Tarif indicatif</th>
+                      <th className="text-left py-3 sm:py-4 px-3 sm:px-4 font-semibold text-sm sm:text-base text-[#ffffff]">Trajet / Service</th>
+                      <th className="text-right py-3 sm:py-4 px-3 sm:px-4 font-semibold text-sm sm:text-base text-[#ffffff]">Standard</th>
+                      <th className="text-right py-3 sm:py-4 px-3 sm:px-4 font-semibold text-sm sm:text-base text-[#ffffff]">Business</th>
+                      <th className="text-right py-3 sm:py-4 px-3 sm:px-4 font-semibold text-sm sm:text-base text-[#ffffff]">Van</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      { route: 'Genève → Aéroport Genève (GVA)', price: 'À compléter' },
-                      { route: 'Lausanne → Aéroport Genève (GVA)', price: 'À compléter' },
-                      { route: 'Genève → Lausanne', price: 'À compléter' },
-                      { route: 'Montreux → Genève', price: 'À compléter' },
-                      { route: 'Mise à disposition 3h', price: 'À compléter' },
-                      { route: 'Mise à disposition journée', price: 'À compléter' },
+                      { route: 'Genève → Aéroport Genève (GVA)', standard: '65', business: '80', van: '90' },
+                      { route: 'Lausanne → Aéroport Genève (GVA)', standard: '210', business: '250', van: '290' },
+                      { route: 'Genève → Lausanne', standard: '210', business: '250', van: '290' },
+                      { route: 'Montreux → Genève', standard: '290', business: '350', van: '390' },
+                      { route: 'Mise à disposition 3h', standard: '330', business: '400', van: '450' },
+                      { route: 'Mise à disposition journée (8h)', standard: '880', business: '1050', van: '1200' },
                     ].map((item, index) => (
                       <tr key={index} className="border-b border-[#2d3748]/50 last:border-0">
                         <td className="py-3 sm:py-4 px-3 sm:px-4 text-sm sm:text-base text-[#cccccc]">{item.route}</td>
                         <td className="py-3 sm:py-4 px-3 sm:px-4 text-right text-sm sm:text-base text-[#d4af37] font-semibold whitespace-nowrap">
-                          {item.price}
+                          dès {item.standard} CHF
+                        </td>
+                        <td className="py-3 sm:py-4 px-3 sm:px-4 text-right text-sm sm:text-base text-[#d4af37] font-semibold whitespace-nowrap">
+                          dès {item.business} CHF
+                        </td>
+                        <td className="py-3 sm:py-4 px-3 sm:px-4 text-right text-sm sm:text-base text-[#d4af37] font-semibold whitespace-nowrap">
+                          dès {item.van} CHF
                         </td>
                       </tr>
                     ))}
@@ -130,8 +138,7 @@ export default function Tarifs() {
               </div>
               <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-[#d4af37]/10 border-l-4 border-[#d4af37]">
                 <p className="text-xs sm:text-sm text-[#cccccc]">
-                  <strong className="text-[#ffffff]">Note :</strong> Les tarifs exacts sont calculés en fonction de la distance,
-                  du trafic, de l'heure et du type de service. Demandez un devis gratuit pour connaître le prix précis de votre course.
+                  <strong className="text-[#ffffff]">Tarifs indicatifs "à partir de".</strong> Le prix final peut varier selon l'adresse exacte de prise en charge et de destination, l'heure de la course, les conditions de trafic et le type de véhicule choisi. Demandez un devis gratuit pour obtenir le tarif précis adapté à vos besoins.
                 </p>
               </div>
             </Card>
